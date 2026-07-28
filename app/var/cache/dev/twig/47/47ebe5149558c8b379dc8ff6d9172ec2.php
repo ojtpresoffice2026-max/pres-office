@@ -1,0 +1,2434 @@
+<?php
+
+use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Extension\CoreExtension;
+use Twig\Extension\SandboxExtension;
+use Twig\Markup;
+use Twig\Sandbox\SecurityError;
+use Twig\Sandbox\SecurityNotAllowedTagError;
+use Twig\Sandbox\SecurityNotAllowedFilterError;
+use Twig\Sandbox\SecurityNotAllowedFunctionError;
+use Twig\Sandbox\SecurityNotAllowedTestError;
+use Twig\Source;
+use Twig\Template;
+use Twig\TemplateWrapper;
+
+/* landing_page/index.html.twig */
+class __TwigTemplate_affb2b60f2897e0078e3b6b57166b118 extends Template
+{
+    private Source $source;
+    /**
+     * @var array<string, Template>
+     */
+    private array $macros = [];
+
+    public function __construct(Environment $env)
+    {
+        parent::__construct($env);
+
+        $this->source = $this->getSourceContext();
+
+        $this->blocks = [
+            'title' => [$this, 'block_title'],
+            'body' => [$this, 'block_body'],
+        ];
+    }
+
+    protected function doGetParent(array $context): bool|string|Template|TemplateWrapper
+    {
+        // line 1
+        return "base.html.twig";
+    }
+
+    protected function doDisplay(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "landing_page/index.html.twig"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "landing_page/index.html.twig"));
+
+        $this->parent = $this->load("base.html.twig", 1);
+        yield from $this->parent->unwrap()->yield($context, array_merge($this->blocks, $blocks));
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+    }
+
+    // line 3
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_title(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
+
+        yield "PresOffice";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+        yield from [];
+    }
+
+    // line 5
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_body(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
+
+        // line 6
+        yield "
+<!DOCTYPE html>
+<html lang=\"en\" data-theme=\"light\">
+<head>
+<meta charset=\"UTF-8\">
+<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+<title>PresOffice</title>
+<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css\" rel=\"stylesheet\">
+<link href=\"https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css\" rel=\"stylesheet\">
+<link href=\"https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap\" rel=\"stylesheet\">
+</head>
+<body>
+
+<style>
+
+/* ==========================================================
+   THEME TOKENS  — NORSU-inspired: deep blue, white, gold accent
+   ========================================================== */
+
+:root{
+    --navy:#0B1E3D;
+    --navy-soft:#12294F;
+    --blue:#1D4ED8;
+    --blue-bright:#2563EB;
+    --gold:#D4A017;
+    --gold-soft:#F2C94C;
+
+    --bg:#F4F6FB;
+    --surface:#FFFFFF;
+    --surface-2:#F0F3F9;
+    --text:#1B2536;
+    --text-muted:#5B6B85;
+    --border:#E3E8F2;
+    --sidebar-bg:#0B1E3D;
+    --sidebar-text:#B9C4DC;
+    --shadow:0 10px 30px rgba(15,30,60,.08);
+    --shadow-lg:0 20px 45px rgba(15,30,60,.14);
+    --radius:16px;
+}
+
+[data-theme=\"dark\"]{
+    --bg:#0A1220;
+    --surface:#111B2E;
+    --surface-2:#0E1728;
+    --text:#E8ECF6;
+    --text-muted:#93A1BD;
+    --border:#1E2A42;
+    --sidebar-bg:#070D1A;
+    --sidebar-text:#8DA0C4;
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+    --shadow-lg:0 25px 55px rgba(0,0,0,.5);
+}
+
+*{ box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+    margin:0;
+    padding:0;
+    font-family:\"Inter\",-apple-system,\"Segoe UI\",sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+    transition:background .35s ease, color .35s ease;
+}
+
+h1,h2,h3,h4,h5,.brand-font{
+    font-family:\"Poppins\",sans-serif;
+}
+
+::selection{ background:var(--gold-soft); color:var(--navy); }
+
+/* Scrollbar */
+::-webkit-scrollbar{ width:10px; }
+::-webkit-scrollbar-track{ background:var(--bg); }
+::-webkit-scrollbar-thumb{ background:var(--border); border-radius:10px; }
+::-webkit-scrollbar-thumb:hover{ background:var(--blue-bright); }
+
+/* ==========================
+   PRELOADER
+========================== */
+#preloader{
+    position:fixed; inset:0; z-index:9999;
+    background:var(--navy);
+    display:flex; align-items:center; justify-content:center;
+    transition:opacity .5s ease, visibility .5s ease;
+}
+#preloader.hide{ opacity:0; visibility:hidden; }
+.preload-ring{
+    width:52px; height:52px;
+    border:4px solid rgba(255,255,255,.15);
+    border-top-color:var(--gold);
+    border-radius:50%;
+    animation:spin .9s linear infinite;
+}
+@keyframes spin{ to{ transform:rotate(360deg); } }
+
+/* ==========================
+   TOP UTILITY BAR (mobile menu trigger + theme toggle)
+========================== */
+.topbar{
+    position:fixed;
+    top:0; right:0; left:0;
+    height:64px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px 0 16px;
+    z-index:1100;
+    pointer-events:none;
+}
+.topbar > *{ pointer-events:auto; }
+
+.menu-toggle{
+    display:none;
+    width:44px; height:44px;
+    border-radius:12px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    box-shadow:var(--shadow);
+    align-items:center;
+    justify-content:center;
+    color:var(--text);
+    font-size:20px;
+    cursor:pointer;
+    margin-top:12px;
+}
+
+.theme-toggle{
+    margin-left:auto;
+    margin-top:12px;
+    width:52px;
+    height:30px;
+    border-radius:30px;
+    background:var(--navy);
+    border:1px solid var(--border);
+    position:relative;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    padding:3px;
+    box-shadow:var(--shadow);
+    transition:.3s;
+}
+.theme-toggle .knob{
+    width:22px; height:22px;
+    border-radius:50%;
+    background:linear-gradient(145deg,var(--gold-soft),var(--gold));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    color:var(--navy);
+    transform:translateX(0);
+    transition:transform .35s cubic-bezier(.4,0,.2,1);
+}
+[data-theme=\"dark\"] .theme-toggle .knob{ transform:translateX(22px); }
+
+/* ==========================
+   SIDEBAR
+========================== */
+
+.sidebar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:230px;
+    height:100vh;
+    background:var(--sidebar-bg);
+    display:flex;
+    flex-direction:column;
+    box-shadow:5px 0 25px rgba(0,0,0,.2);
+    z-index:1050;
+    transition:transform .35s ease, background .35s ease;
+    border-right:1px solid rgba(255,255,255,.05);
+}
+
+.logo{
+    padding:26px 22px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo .seal{
+    width:38px; height:38px;
+    border-radius:50%;
+    background:conic-gradient(from 180deg, var(--gold), var(--blue-bright), var(--gold));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+    box-shadow:0 0 0 2px rgba(255,255,255,.15);
+}
+.logo .seal i{ color:#fff; font-size:16px; }
+
+.logo h2{
+    margin:0;
+    font-size:19px;
+    color:#fff;
+    font-weight:700;
+    letter-spacing:.2px;
+}
+.logo span{
+    display:block;
+    font-size:10.5px;
+    color:var(--sidebar-text);
+    font-family:\"Inter\",sans-serif;
+    font-weight:500;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    margin-top:2px;
+}
+
+.sidebar-scroll{
+    flex:1;
+    overflow-y:auto;
+    padding:16px 12px;
+}
+
+.sidebar-section-label{
+    font-size:10.5px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:rgba(185,196,220,.45);
+    padding:14px 14px 6px;
+    font-weight:600;
+}
+
+.sidebar ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+.sidebar li{
+    margin-bottom:4px;
+}
+
+.sidebar a{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:11px 14px;
+    border-radius:10px;
+    color:var(--sidebar-text);
+    text-decoration:none;
+    font-size:14px;
+    font-weight:500;
+    transition:.2s;
+    position:relative;
+}
+
+.sidebar a i{ font-size:16px; width:18px; text-align:center; }
+
+.sidebar a:hover{
+    background:rgba(255,255,255,.06);
+    color:#fff;
+}
+
+.sidebar a.active{
+    background:linear-gradient(135deg,var(--blue-bright),var(--blue));
+    color:#fff;
+    box-shadow:0 4px 14px rgba(37,99,235,.4);
+}
+
+.sidebar .sub-link{
+    padding-left:38px;
+    font-size:13px;
+    font-weight:400;
+}
+
+.sidebar-footer{
+    padding:16px 22px 22px;
+    border-top:1px solid rgba(255,255,255,.08);
+    font-size:11.5px;
+    color:rgba(185,196,220,.5);
+}
+
+.sidebar-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    z-index:1040;
+    backdrop-filter:blur(2px);
+}
+.sidebar-overlay.show{ display:block; }
+
+/* ==========================
+   MAIN
+========================== */
+
+.main{
+    margin-left:230px;
+    transition:margin .35s ease;
+}
+
+/* ==========================
+   HERO
+========================== */
+
+.hero{
+    min-height:96vh;
+    display:flex;
+    align-items:center;
+    padding:100px 0 60px;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero::before{
+    content:\"\";
+    position:absolute;
+    top:-20%;
+    right:-10%;
+    width:600px;
+    height:600px;
+    background:radial-gradient(circle, rgba(37,99,235,.12), transparent 70%);
+    border-radius:50%;
+    z-index:0;
+}
+.hero::after{
+    content:\"\";
+    position:absolute;
+    bottom:-15%;
+    left:5%;
+    width:400px;
+    height:400px;
+    background:radial-gradient(circle, rgba(212,160,23,.10), transparent 70%);
+    border-radius:50%;
+    z-index:0;
+}
+
+.hero .container-fluid{ position:relative; z-index:1; }
+
+.eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    padding:7px 16px;
+    border-radius:30px;
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--blue-bright);
+    box-shadow:var(--shadow);
+    margin-bottom:22px;
+}
+.eyebrow .dot{
+    width:7px; height:7px; border-radius:50%;
+    background:#22C55E;
+    box-shadow:0 0 0 3px rgba(34,197,94,.25);
+}
+
+.hero h1{
+    font-size:clamp(32px,4.2vw,48px);
+    font-weight:800;
+    color:var(--text);
+    line-height:1.18;
+    letter-spacing:-.5px;
+}
+
+.hero h1 .accent{
+    background:linear-gradient(100deg,var(--blue-bright),var(--gold));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    font-size:16.5px;
+    color:var(--text-muted);
+    line-height:1.85;
+    margin:22px 0 32px;
+    max-width:520px;
+}
+
+.hero-stats{
+    display:flex;
+    gap:30px;
+    margin-top:40px;
+    flex-wrap:wrap;
+}
+.hero-stats .stat h3{
+    font-size:26px;
+    font-weight:800;
+    margin:0;
+    color:var(--text);
+}
+.hero-stats .stat span{
+    font-size:12.5px;
+    color:var(--text-muted);
+    font-weight:500;
+}
+
+.hero-visual{
+    position:relative;
+}
+.hero-visual .card-float{
+    position:absolute;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:14px;
+    box-shadow:var(--shadow-lg);
+    padding:14px 18px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    animation:float 4s ease-in-out infinite;
+    z-index:2;
+}
+.hero-visual .card-float.f1{ top:8%; left:-6%; animation-delay:0s; }
+.hero-visual .card-float.f2{ bottom:10%; right:-4%; animation-delay:1.2s; }
+.hero-visual .card-float i{ font-size:20px; }
+.hero-visual .card-float small{ display:block; color:var(--text-muted); font-size:11px; }
+.hero-visual .card-float strong{ font-size:13.5px; }
+
+@keyframes float{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-12px); }
+}
+
+.hero-img-wrap{
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:var(--shadow-lg);
+    position:relative;
+    border:1px solid var(--border);
+}
+.hero-img-wrap img{
+    width:100%;
+    display:block;
+    transition:transform .5s ease;
+}
+.hero-img-wrap:hover img{ transform:scale(1.04); }
+
+/* ==========================
+   BUTTONS
+========================== */
+
+.btn{
+    border-radius:10px;
+    padding:12px 26px;
+    font-size:14.5px;
+    font-weight:600;
+    transition:.25s;
+    border:none;
+}
+
+.btn-primary{
+    background:linear-gradient(135deg,var(--blue-bright),var(--blue));
+    box-shadow:0 8px 20px rgba(37,99,235,.35);
+}
+.btn-primary:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 26px rgba(37,99,235,.45);
+    background:linear-gradient(135deg,var(--blue),var(--blue-bright));
+}
+
+.btn-outline-primary{
+    border:1.5px solid var(--border);
+    color:var(--text);
+    background:var(--surface);
+}
+.btn-outline-primary:hover{
+    background:var(--surface-2);
+    border-color:var(--blue-bright);
+    color:var(--blue-bright);
+    transform:translateY(-2px);
+}
+
+/* ==========================
+   SECTIONS
+========================== */
+
+section{
+    padding:90px 0;
+    position:relative;
+}
+
+.section-tag{
+    display:inline-block;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--gold);
+    background:rgba(212,160,23,.12);
+    padding:6px 14px;
+    border-radius:20px;
+    margin-bottom:14px;
+}
+
+section h2{
+    font-size:clamp(24px,3vw,32px);
+    font-weight:800;
+    color:var(--text);
+    letter-spacing:-.3px;
+}
+
+.reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity .7s ease, transform .7s ease;
+}
+.reveal.in{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* ==========================
+   FEATURE CARDS
+========================== */
+
+.feature-card{
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:32px 28px;
+    background:var(--surface);
+    box-shadow:var(--shadow);
+    transition:.35s;
+    height:100%;
+}
+
+.feature-card:hover{
+    transform:translateY(-8px);
+    box-shadow:var(--shadow-lg);
+    border-color:transparent;
+}
+
+.feature-icon{
+    width:56px; height:56px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    margin-bottom:20px;
+}
+.feature-icon.blue{ background:rgba(37,99,235,.12); color:var(--blue-bright); }
+.feature-icon.gold{ background:rgba(212,160,23,.15); color:var(--gold); }
+.feature-icon.green{ background:rgba(34,197,94,.12); color:#22C55E; }
+.feature-icon.cyan{ background:rgba(6,182,212,.12); color:#06B6D4; }
+.feature-icon.red{ background:rgba(239,68,68,.12); color:#EF4444; }
+.feature-icon.purple{ background:rgba(139,92,246,.12); color:#8B5CF6; }
+
+.feature-card h4{
+    font-size:17.5px;
+    font-weight:700;
+    margin-bottom:10px;
+    color:var(--text);
+}
+
+.feature-card p{
+    font-size:14px;
+    color:var(--text-muted);
+    line-height:1.75;
+    margin:0;
+}
+
+/* ==========================
+   ABOUT
+========================== */
+
+#about{
+    background:var(--surface);
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+}
+
+#about p{
+    font-size:15.5px;
+    line-height:1.9;
+    color:var(--text-muted);
+}
+
+.about-visual{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.about-seal{
+    width:220px; height:220px;
+    border-radius:50%;
+    background:linear-gradient(145deg,var(--navy),var(--navy-soft));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 25px 60px rgba(11,30,61,.35);
+    position:relative;
+}
+.about-seal::before{
+    content:\"\";
+    position:absolute;
+    inset:10px;
+    border-radius:50%;
+    border:2px dashed rgba(212,160,23,.5);
+}
+.about-seal i{
+    font-size:64px;
+    background:linear-gradient(135deg,var(--gold-soft),var(--gold));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.about-checklist{
+    list-style:none;
+    padding:0;
+    margin:24px 0 0;
+}
+.about-checklist li{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    margin-bottom:12px;
+    font-size:14.5px;
+    color:var(--text-muted);
+}
+.about-checklist i{
+    color:#22C55E;
+    margin-top:2px;
+}
+
+/* ==========================
+   FOOTER
+========================== */
+
+footer{
+    background:var(--navy);
+    color:#C6D1E8;
+}
+
+footer h3{
+    font-size:20px;
+    color:#fff;
+    font-weight:700;
+}
+
+footer h5{
+    color:#fff;
+    font-size:14.5px;
+    font-weight:600;
+    margin-bottom:16px;
+}
+
+footer p, footer a{
+    font-size:14px;
+    color:#B9C4DC;
+}
+footer a{ text-decoration:none; transition:.2s; }
+footer a:hover{ color:var(--gold-soft); padding-left:3px; }
+
+.footer-social a{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:38px; height:38px;
+    border-radius:10px;
+    background:rgba(255,255,255,.06);
+    margin-right:8px;
+    color:#fff !important;
+}
+.footer-social a:hover{
+    background:var(--blue-bright);
+    transform:translateY(-3px);
+}
+
+/* ==========================
+   BACK TO TOP
+========================== */
+.back-to-top{
+    position:fixed;
+    bottom:26px;
+    right:26px;
+    width:46px; height:46px;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--blue-bright),var(--blue));
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 10px 25px rgba(37,99,235,.4);
+    cursor:pointer;
+    z-index:900;
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(10px);
+    transition:.3s;
+}
+.back-to-top.show{
+    opacity:1; visibility:visible; transform:translateY(0);
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media (max-width:991px){
+    .sidebar{
+        transform:translateX(-100%);
+    }
+    .sidebar.open{
+        transform:translateX(0);
+    }
+    .main{
+        margin-left:0;
+    }
+    .menu-toggle{
+        display:flex;
+    }
+    .hero{
+        padding-top:110px;
+        text-align:center;
+    }
+    .hero p{ margin-left:auto; margin-right:auto; }
+    .hero-stats{ justify-content:center; }
+    .hero-visual{ margin-top:50px; }
+    .hero-visual .card-float{ display:none; }
+}
+
+@media (max-width:575px){
+    .hero h1{ font-size:30px; }
+    section{ padding:64px 0; }
+}
+
+</style>
+
+<div id=\"preloader\"><div class=\"preload-ring\"></div></div>
+
+<div class=\"topbar\">
+    <div class=\"menu-toggle\" id=\"menuToggle\"><i class=\"bi bi-list\"></i></div>
+    <div class=\"theme-toggle\" id=\"themeToggle\" title=\"Toggle dark mode\">
+        <div class=\"knob\"><i class=\"bi bi-sun-fill\"></i></div>
+    </div>
+</div>
+
+<div class=\"sidebar-overlay\" id=\"sidebarOverlay\"></div>
+
+<div class=\"sidebar\" id=\"sidebar\">
+
+    <div class=\"logo\">
+        <div class=\"seal\"><i class=\"bi bi-mortarboard-fill\"></i></div>
+        <div>
+            <h2>PresOffice</h2>
+            <span>NORSU &middot; President\x27s Office</span>
+        </div>
+    </div>
+
+    <div class=\"sidebar-scroll\">
+        <ul>
+            <li><a href=\"#top\" class=\"nav-link active\" data-section=\"top\"><i class=\"bi bi-house-door-fill\"></i> Home</a></li>
+            <li><a href=\"#features\" class=\"nav-link\" data-section=\"features\"><i class=\"bi bi-grid-fill\"></i> Features</a></li>
+        </ul>
+
+        <div class=\"sidebar-section-label\">Documents</div>
+        <ul>
+            <li><a href=\"#\" class=\"sub-link\"><i class=\"bi bi-send-fill\"></i> Sent</a></li>
+            <li><a href=\"#\" class=\"sub-link\"><i class=\"bi bi-inbox-fill\"></i> Received</a></li>
+            <li><a href=\"#\" class=\"sub-link\"><i class=\"bi bi-file-earmark-fill\"></i> Files</a></li>
+            <li><a href=\"#\" class=\"sub-link\"><i class=\"bi bi-hourglass-split\"></i> Pending</a></li>
+            <li><a href=\"#\" class=\"sub-link\"><i class=\"bi bi-geo-alt-fill\"></i> Trace</a></li>
+        </ul>
+
+        <div class=\"sidebar-section-label\">General</div>
+        <ul>
+            <li><a href=\"#about\" class=\"nav-link\" data-section=\"about\"><i class=\"bi bi-info-circle-fill\"></i> About</a></li>
+            <li><a href=\"#contact\" class=\"nav-link\" data-section=\"contact\"><i class=\"bi bi-envelope-fill\"></i> Contact</a></li>
+        </ul>
+    </div>
+
+    <div class=\"sidebar-footer\">
+        &copy; <span id=\"year\"></span> NORSU PresOffice
+    </div>
+
+</div>
+
+<div class=\"main\" id=\"top\">
+
+<section class=\"hero\">
+
+<div class=\"container-fluid px-5\">
+
+<div class=\"row align-items-center\">
+
+<div class=\"col-lg-6\">
+
+<div class=\"eyebrow\"><span class=\"dot\"></span> System Online</div>
+
+<h1>
+Manage University Documents<br>
+<span class=\"accent\">Securely & Efficiently</span>
+</h1>
+
+<p>
+PresOffice is the official document management platform of the NORSU
+President\x27s Office — helping the university store, organize, search,
+and track files with speed and accountability.
+</p>
+
+<div>
+<a href=\"#features\" class=\"btn btn-primary me-2\">
+Explore Features <i class=\"bi bi-arrow-right ms-1\"></i>
+</a>
+
+<a href=\"#about\" class=\"btn btn-outline-primary\">
+Learn More
+</a>
+</div>
+
+<div class=\"hero-stats\">
+    <div class=\"stat\"><h3>100%</h3><span>Digital Records</span></div>
+    <div class=\"stat\"><h3>24/7</h3><span>Document Tracking</span></div>
+    <div class=\"stat\"><h3>Secure</h3><span>Role-Based Access</span></div>
+</div>
+
+</div>
+
+<div class=\"col-lg-6 text-center\">
+
+<div class=\"hero-visual\">
+
+<div class=\"card-float f1\">
+    <i class=\"bi bi-shield-check text-primary\"></i>
+    <div><small>Status</small><strong>Secured</strong></div>
+</div>
+
+<div class=\"card-float f2\">
+    <i class=\"bi bi-check-circle-fill text-success\"></i>
+    <div><small>Document</small><strong>Approved</strong></div>
+</div>
+
+<div class=\"hero-img-wrap\">
+<img
+src=\"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900\"
+alt=\"Document Management\">
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!-- ==========================
+     FEATURES
+========================== -->
+
+<section id=\"features\">
+
+    <div class=\"container-fluid px-5\">
+
+        <div class=\"text-center mb-5 reveal\">
+
+            <span class=\"section-tag\">Capabilities</span>
+            <h2>System Features</h2>
+
+            <p class=\"text-muted mt-2\">
+                Everything the Office needs to manage documents securely, in one place.
+            </p>
+
+        </div>
+
+        <div class=\"row g-4\">
+
+            <div class=\"col-lg-4 col-md-6 reveal\">
+                <div class=\"feature-card h-100\">
+                    <div class=\"feature-icon blue\"><i class=\"bi bi-cloud-arrow-up-fill\"></i></div>
+                    <h4>File Upload</h4>
+                    <p>Upload documents securely with support for multiple file formats and large file sizes.</p>
+                </div>
+            </div>
+
+            <div class=\"col-lg-4 col-md-6 reveal\">
+                <div class=\"feature-card h-100\">
+                    <div class=\"feature-icon gold\"><i class=\"bi bi-folder-fill\"></i></div>
+                    <h4>Organization</h4>
+                    <p>Organize files into folders and categories for quick access and easy management.</p>
+                </div>
+            </div>
+
+            <div class=\"col-lg-4 col-md-6 reveal\">
+                <div class=\"feature-card h-100\">
+                    <div class=\"feature-icon green\"><i class=\"bi bi-search\"></i></div>
+                    <h4>Advanced Search</h4>
+                    <p>Instantly locate documents using keywords, categories, dates, or departments.</p>
+                </div>
+            </div>
+
+            <div class=\"col-lg-4 col-md-6 reveal\">
+                <div class=\"feature-card h-100\">
+                    <div class=\"feature-icon cyan\"><i class=\"bi bi-people-fill\"></i></div>
+                    <h4>User Management</h4>
+                    <p>Manage administrators, staff, departments, and permissions from one place.</p>
+                </div>
+            </div>
+
+            <div class=\"col-lg-4 col-md-6 reveal\">
+                <div class=\"feature-card h-100\">
+                    <div class=\"feature-icon red\"><i class=\"bi bi-clock-history\"></i></div>
+                    <h4>Activity Logs</h4>
+                    <p>Monitor user activities with complete audit trails and document history.</p>
+                </div>
+            </div>
+
+            <div class=\"col-lg-4 col-md-6 reveal\">
+                <div class=\"feature-card h-100\">
+                    <div class=\"feature-icon purple\"><i class=\"bi bi-shield-lock-fill\"></i></div>
+                    <h4>Security</h4>
+                    <p>Secure every document using authentication, encryption, and role-based access control.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================
+     ABOUT
+========================== -->
+
+<section id=\"about\">
+
+    <div class=\"container-fluid px-5\">
+
+        <div class=\"row align-items-center g-5\">
+
+            <div class=\"col-lg-6 reveal\">
+
+                <span class=\"section-tag\">Who We Are</span>
+                <h2 class=\"mb-4\">About PresOffice</h2>
+
+                <p>
+                    PresOffice is the official document management platform developed
+                    for the Negros Oriental State University President\x27s Office. It
+                    centralizes document storage, improves collaboration, and
+                    simplifies file retrieval across the university.
+                </p>
+
+                <p>
+                    Built for the Office\x27s daily operations, PresOffice enhances
+                    productivity through role-based permissions, secure file storage,
+                    document versioning, and comprehensive activity monitoring.
+                </p>
+
+                <ul class=\"about-checklist\">
+                    <li><i class=\"bi bi-check-circle-fill\"></i> Centralized, searchable document archive</li>
+                    <li><i class=\"bi bi-check-circle-fill\"></i> Full audit trail for every file action</li>
+                    <li><i class=\"bi bi-check-circle-fill\"></i> Encrypted storage & role-based access</li>
+                </ul>
+
+            </div>
+
+            <div class=\"col-lg-6 about-visual reveal\">
+                <div class=\"about-seal\">
+                    <i class=\"bi bi-folder-check\"></i>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================
+     FOOTER
+========================== -->
+
+<footer id=\"contact\" class=\"py-5\">
+
+    <div class=\"container-fluid px-5\">
+
+        <div class=\"row g-4\">
+
+            <div class=\"col-md-4\">
+
+                <h3>PresOffice</h3>
+
+                <p>
+                    Official document management system of the NORSU President\x27s Office.
+                </p>
+
+                <div class=\"footer-social mt-3\">
+                    <a href=\"#\"><i class=\"bi bi-facebook\"></i></a>
+                    <a href=\"#\"><i class=\"bi bi-globe\"></i></a>
+                    <a href=\"#\"><i class=\"bi bi-envelope-fill\"></i></a>
+                </div>
+
+            </div>
+
+            <div class=\"col-md-4\">
+
+                <h5>Quick Links</h5>
+
+                <p><a href=\"#top\">Home</a></p>
+                <p><a href=\"#features\">Features</a></p>
+                <p><a href=\"#about\">About</a></p>
+
+            </div>
+
+            <div class=\"col-md-4\">
+
+                <h5>Contact</h5>
+
+                <p>
+                    <i class=\"bi bi-envelope-fill\"></i>
+                    support@presoffice.norsu.edu.ph
+                </p>
+
+                <p>
+                    <i class=\"bi bi-telephone-fill\"></i>
+                    (+63) 35 522-5050
+                </p>
+
+                <p>
+                    <i class=\"bi bi-geo-alt-fill\"></i>
+                    Kagawasan Avenue, Dumaguete City
+                </p>
+
+            </div>
+
+        </div>
+
+        <hr class=\"border-secondary my-4\" style=\"opacity:.15\">
+
+        <div class=\"text-center\" style=\"font-size:13px; opacity:.8;\">
+
+            &copy; <span id=\"year2\"></span> PresOffice &middot; Negros Oriental State University. All Rights Reserved.
+
+        </div>
+
+    </div>
+
+</footer>
+
+</div>
+
+<div class=\"back-to-top\" id=\"backToTop\"><i class=\"bi bi-arrow-up\"></i></div>
+
+<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"></script>
+<script>
+document.addEventListener(\x27DOMContentLoaded\x27, function(){
+
+    // Preloader
+    window.addEventListener(\x27load\x27, function(){
+        var pre = document.getElementById(\x27preloader\x27);
+        setTimeout(function(){ pre.classList.add(\x27hide\x27); }, 250);
+    });
+
+    document.getElementById(\x27year\x27).textContent = new Date().getFullYear();
+    document.getElementById(\x27year2\x27).textContent = new Date().getFullYear();
+
+    /* THEME TOGGLE — persists via localStorage */
+    var root = document.documentElement;
+    var toggle = document.getElementById(\x27themeToggle\x27);
+    var knobIcon = toggle.querySelector(\x27.knob i\x27);
+    var saved = localStorage.getItem(\x27presoffice-theme\x27);
+    var systemDark = window.matchMedia && window.matchMedia(\x27(prefers-color-scheme: dark)\x27).matches;
+    var initial = saved || (systemDark ? \x27dark\x27 : \x27light\x27);
+    setTheme(initial);
+
+    toggle.addEventListener(\x27click\x27, function(){
+        var current = root.getAttribute(\x27data-theme\x27);
+        setTheme(current === \x27dark\x27 ? \x27light\x27 : \x27dark\x27);
+    });
+
+    function setTheme(mode){
+        root.setAttribute(\x27data-theme\x27, mode);
+        localStorage.setItem(\x27presoffice-theme\x27, mode);
+        knobIcon.className = mode === \x27dark\x27 ? \x27bi bi-moon-stars-fill\x27 : \x27bi bi-sun-fill\x27;
+    }
+
+    /* MOBILE SIDEBAR */
+    var sidebar = document.getElementById(\x27sidebar\x27);
+    var menuToggle = document.getElementById(\x27menuToggle\x27);
+    var overlay = document.getElementById(\x27sidebarOverlay\x27);
+
+    menuToggle.addEventListener(\x27click\x27, function(){
+        sidebar.classList.add(\x27open\x27);
+        overlay.classList.add(\x27show\x27);
+    });
+    overlay.addEventListener(\x27click\x27, closeSidebar);
+    function closeSidebar(){
+        sidebar.classList.remove(\x27open\x27);
+        overlay.classList.remove(\x27show\x27);
+    }
+    document.querySelectorAll(\x27.sidebar a\x27).forEach(function(a){
+        a.addEventListener(\x27click\x27, closeSidebar);
+    });
+
+    /* ACTIVE LINK ON SCROLL */
+    var navLinks = document.querySelectorAll(\x27.nav-link\x27);
+    var sections = [\x27top\x27,\x27features\x27,\x27about\x27,\x27contact\x27].map(function(id){
+        return document.getElementById(id);
+    }).filter(Boolean);
+
+    function onScroll(){
+        var pos = window.scrollY + 120;
+        var current = \x27top\x27;
+        sections.forEach(function(sec){
+            if(sec.offsetTop <= pos) current = sec.id;
+        });
+        navLinks.forEach(function(link){
+            link.classList.toggle(\x27active\x27, link.dataset.section === current);
+        });
+
+        // back to top
+        document.getElementById(\x27backToTop\x27).classList.toggle(\x27show\x27, window.scrollY > 500);
+    }
+    window.addEventListener(\x27scroll\x27, onScroll);
+    onScroll();
+
+    document.getElementById(\x27backToTop\x27).addEventListener(\x27click\x27, function(){
+        window.scrollTo({top:0, behavior:\x27smooth\x27});
+    });
+
+    /* SCROLL REVEAL */
+    var revealEls = document.querySelectorAll(\x27.reveal\x27);
+    var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+            if(entry.isIntersecting){
+                entry.target.classList.add(\x27in\x27);
+                io.unobserve(entry.target);
+            }
+        });
+    }, { threshold:0.15 });
+    revealEls.forEach(function(el){ io.observe(el); });
+
+});
+</script>
+
+</body>
+</html>
+
+";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+        yield from [];
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getTemplateName(): string
+    {
+        return "landing_page/index.html.twig";
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function isTraitable(): bool
+    {
+        return false;
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getDebugInfo(): array
+    {
+        return array (  101 => 6,  88 => 5,  65 => 3,  42 => 1,);
+    }
+
+    public function getSourceContext(): Source
+    {
+        return new Source("{% extends \x27base.html.twig\x27 %}
+
+{% block title %}PresOffice{% endblock %}
+
+{% block body %}
+
+<!DOCTYPE html>
+<html lang=\"en\" data-theme=\"light\">
+<head>
+<meta charset=\"UTF-8\">
+<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+<title>PresOffice</title>
+<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css\" rel=\"stylesheet\">
+<link href=\"https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css\" rel=\"stylesheet\">
+<link href=\"https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap\" rel=\"stylesheet\">
+</head>
+<body>
+
+<style>
+
+/* ==========================================================
+   THEME TOKENS  — NORSU-inspired: deep blue, white, gold accent
+   ========================================================== */
+
+:root{
+    --navy:#0B1E3D;
+    --navy-soft:#12294F;
+    --blue:#1D4ED8;
+    --blue-bright:#2563EB;
+    --gold:#D4A017;
+    --gold-soft:#F2C94C;
+
+    --bg:#F4F6FB;
+    --surface:#FFFFFF;
+    --surface-2:#F0F3F9;
+    --text:#1B2536;
+    --text-muted:#5B6B85;
+    --border:#E3E8F2;
+    --sidebar-bg:#0B1E3D;
+    --sidebar-text:#B9C4DC;
+    --shadow:0 10px 30px rgba(15,30,60,.08);
+    --shadow-lg:0 20px 45px rgba(15,30,60,.14);
+    --radius:16px;
+}
+
+[data-theme=\"dark\"]{
+    --bg:#0A1220;
+    --surface:#111B2E;
+    --surface-2:#0E1728;
+    --text:#E8ECF6;
+    --text-muted:#93A1BD;
+    --border:#1E2A42;
+    --sidebar-bg:#070D1A;
+    --sidebar-text:#8DA0C4;
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+    --shadow-lg:0 25px 55px rgba(0,0,0,.5);
+}
+
+*{ box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+    margin:0;
+    padding:0;
+    font-family:\"Inter\",-apple-system,\"Segoe UI\",sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+    transition:background .35s ease, color .35s ease;
+}
+
+h1,h2,h3,h4,h5,.brand-font{
+    font-family:\"Poppins\",sans-serif;
+}
+
+::selection{ background:var(--gold-soft); color:var(--navy); }
+
+/* Scrollbar */
+::-webkit-scrollbar{ width:10px; }
+::-webkit-scrollbar-track{ background:var(--bg); }
+::-webkit-scrollbar-thumb{ background:var(--border); border-radius:10px; }
+::-webkit-scrollbar-thumb:hover{ background:var(--blue-bright); }
+
+/* ==========================
+   PRELOADER
+========================== */
+#preloader{
+    position:fixed; inset:0; z-index:9999;
+    background:var(--navy);
+    display:flex; align-items:center; justify-content:center;
+    transition:opacity .5s ease, visibility .5s ease;
+}
+#preloader.hide{ opacity:0; visibility:hidden; }
+.preload-ring{
+    width:52px; height:52px;
+    border:4px solid rgba(255,255,255,.15);
+    border-top-color:var(--gold);
+    border-radius:50%;
+    animation:spin .9s linear infinite;
+}
+@keyframes spin{ to{ transform:rotate(360deg); } }
+
+/* ==========================
+   TOP UTILITY BAR (mobile menu trigger + theme toggle)
+========================== */
+.topbar{
+    position:fixed;
+    top:0; right:0; left:0;
+    height:64px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px 0 16px;
+    z-index:1100;
+    pointer-events:none;
+}
+.topbar > *{ pointer-events:auto; }
+
+.menu-toggle{
+    display:none;
+    width:44px; height:44px;
+    border-radius:12px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    box-shadow:var(--shadow);
+    align-items:center;
+    justify-content:center;
+    color:var(--text);
+    font-size:20px;
+    cursor:pointer;
+    margin-top:12px;
+}
+
+.theme-toggle{
+    margin-left:auto;
+    margin-top:12px;
+    width:52px;
+    height:30px;
+    border-radius:30px;
+    background:var(--navy);
+    border:1px solid var(--border);
+    position:relative;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    padding:3px;
+    box-shadow:var(--shadow);
+    transition:.3s;
+}
+.theme-toggle .knob{
+    width:22px; height:22px;
+    border-radius:50%;
+    background:linear-gradient(145deg,var(--gold-soft),var(--gold));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    color:var(--navy);
+    transform:translateX(0);
+    transition:transform .35s cubic-bezier(.4,0,.2,1);
+}
+[data-theme=\"dark\"] .theme-toggle .knob{ transform:translateX(22px); }
+
+/* ==========================
+   SIDEBAR
+========================== */
+
+.sidebar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:230px;
+    height:100vh;
+    background:var(--sidebar-bg);
+    display:flex;
+    flex-direction:column;
+    box-shadow:5px 0 25px rgba(0,0,0,.2);
+    z-index:1050;
+    transition:transform .35s ease, background .35s ease;
+    border-right:1px solid rgba(255,255,255,.05);
+}
+
+.logo{
+    padding:26px 22px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo .seal{
+    width:38px; height:38px;
+    border-radius:50%;
+    background:conic-gradient(from 180deg, var(--gold), var(--blue-bright), var(--gold));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+    box-shadow:0 0 0 2px rgba(255,255,255,.15);
+}
+.logo .seal i{ color:#fff; font-size:16px; }
+
+.logo h2{
+    margin:0;
+    font-size:19px;
+    color:#fff;
+    font-weight:700;
+    letter-spacing:.2px;
+}
+.logo span{
+    display:block;
+    font-size:10.5px;
+    color:var(--sidebar-text);
+    font-family:\"Inter\",sans-serif;
+    font-weight:500;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    margin-top:2px;
+}
+
+.sidebar-scroll{
+    flex:1;
+    overflow-y:auto;
+    padding:16px 12px;
+}
+
+.sidebar-section-label{
+    font-size:10.5px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:rgba(185,196,220,.45);
+    padding:14px 14px 6px;
+    font-weight:600;
+}
+
+.sidebar ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+.sidebar li{
+    margin-bottom:4px;
+}
+
+.sidebar a{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:11px 14px;
+    border-radius:10px;
+    color:var(--sidebar-text);
+    text-decoration:none;
+    font-size:14px;
+    font-weight:500;
+    transition:.2s;
+    position:relative;
+}
+
+.sidebar a i{ font-size:16px; width:18px; text-align:center; }
+
+.sidebar a:hover{
+    background:rgba(255,255,255,.06);
+    color:#fff;
+}
+
+.sidebar a.active{
+    background:linear-gradient(135deg,var(--blue-bright),var(--blue));
+    color:#fff;
+    box-shadow:0 4px 14px rgba(37,99,235,.4);
+}
+
+.sidebar .sub-link{
+    padding-left:38px;
+    font-size:13px;
+    font-weight:400;
+}
+
+.sidebar-footer{
+    padding:16px 22px 22px;
+    border-top:1px solid rgba(255,255,255,.08);
+    font-size:11.5px;
+    color:rgba(185,196,220,.5);
+}
+
+.sidebar-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    z-index:1040;
+    backdrop-filter:blur(2px);
+}
+.sidebar-overlay.show{ display:block; }
+
+/* ==========================
+   MAIN
+========================== */
+
+.main{
+    margin-left:230px;
+    transition:margin .35s ease;
+}
+
+/* ==========================
+   HERO
+========================== */
+
+.hero{
+    min-height:96vh;
+    display:flex;
+    align-items:center;
+    padding:100px 0 60px;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero::before{
+    content:\"\";
+    position:absolute;
+    top:-20%;
+    right:-10%;
+    width:600px;
+    height:600px;
+    background:radial-gradient(circle, rgba(37,99,235,.12), transparent 70%);
+    border-radius:50%;
+    z-index:0;
+}
+.hero::after{
+    content:\"\";
+    position:absolute;
+    bottom:-15%;
+    left:5%;
+    width:400px;
+    height:400px;
+    background:radial-gradient(circle, rgba(212,160,23,.10), transparent 70%);
+    border-radius:50%;
+    z-index:0;
+}
+
+.hero .container-fluid{ position:relative; z-index:1; }
+
+.eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    padding:7px 16px;
+    border-radius:30px;
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--blue-bright);
+    box-shadow:var(--shadow);
+    margin-bottom:22px;
+}
+.eyebrow .dot{
+    width:7px; height:7px; border-radius:50%;
+    background:#22C55E;
+    box-shadow:0 0 0 3px rgba(34,197,94,.25);
+}
+
+.hero h1{
+    font-size:clamp(32px,4.2vw,48px);
+    font-weight:800;
+    color:var(--text);
+    line-height:1.18;
+    letter-spacing:-.5px;
+}
+
+.hero h1 .accent{
+    background:linear-gradient(100deg,var(--blue-bright),var(--gold));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    font-size:16.5px;
+    color:var(--text-muted);
+    line-height:1.85;
+    margin:22px 0 32px;
+    max-width:520px;
+}
+
+.hero-stats{
+    display:flex;
+    gap:30px;
+    margin-top:40px;
+    flex-wrap:wrap;
+}
+.hero-stats .stat h3{
+    font-size:26px;
+    font-weight:800;
+    margin:0;
+    color:var(--text);
+}
+.hero-stats .stat span{
+    font-size:12.5px;
+    color:var(--text-muted);
+    font-weight:500;
+}
+
+.hero-visual{
+    position:relative;
+}
+.hero-visual .card-float{
+    position:absolute;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:14px;
+    box-shadow:var(--shadow-lg);
+    padding:14px 18px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    animation:float 4s ease-in-out infinite;
+    z-index:2;
+}
+.hero-visual .card-float.f1{ top:8%; left:-6%; animation-delay:0s; }
+.hero-visual .card-float.f2{ bottom:10%; right:-4%; animation-delay:1.2s; }
+.hero-visual .card-float i{ font-size:20px; }
+.hero-visual .card-float small{ display:block; color:var(--text-muted); font-size:11px; }
+.hero-visual .card-float strong{ font-size:13.5px; }
+
+@keyframes float{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-12px); }
+}
+
+.hero-img-wrap{
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:var(--shadow-lg);
+    position:relative;
+    border:1px solid var(--border);
+}
+.hero-img-wrap img{
+    width:100%;
+    display:block;
+    transition:transform .5s ease;
+}
+.hero-img-wrap:hover img{ transform:scale(1.04); }
+
+/* ==========================
+   BUTTONS
+========================== */
+
+.btn{
+    border-radius:10px;
+    padding:12px 26px;
+    font-size:14.5px;
+    font-weight:600;
+    transition:.25s;
+    border:none;
+}
+
+.btn-primary{
+    background:linear-gradient(135deg,var(--blue-bright),var(--blue));
+    box-shadow:0 8px 20px rgba(37,99,235,.35);
+}
+.btn-primary:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 26px rgba(37,99,235,.45);
+    background:linear-gradient(135deg,var(--blue),var(--blue-bright));
+}
+
+.btn-outline-primary{
+    border:1.5px solid var(--border);
+    color:var(--text);
+    background:var(--surface);
+}
+.btn-outline-primary:hover{
+    background:var(--surface-2);
+    border-color:var(--blue-bright);
+    color:var(--blue-bright);
+    transform:translateY(-2px);
+}
+
+/* ==========================
+   SECTIONS
+========================== */
+
+section{
+    padding:90px 0;
+    position:relative;
+}
+
+.section-tag{
+    display:inline-block;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--gold);
+    background:rgba(212,160,23,.12);
+    padding:6px 14px;
+    border-radius:20px;
+    margin-bottom:14px;
+}
+
+section h2{
+    font-size:clamp(24px,3vw,32px);
+    font-weight:800;
+    color:var(--text);
+    letter-spacing:-.3px;
+}
+
+.reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity .7s ease, transform .7s ease;
+}
+.reveal.in{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* ==========================
+   FEATURE CARDS
+========================== */
+
+.feature-card{
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:32px 28px;
+    background:var(--surface);
+    box-shadow:var(--shadow);
+    transition:.35s;
+    height:100%;
+}
+
+.feature-card:hover{
+    transform:translateY(-8px);
+    box-shadow:var(--shadow-lg);
+    border-color:transparent;
+}
+
+.feature-icon{
+    width:56px; height:56px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    margin-bottom:20px;
+}
+.feature-icon.blue{ background:rgba(37,99,235,.12); color:var(--blue-bright); }
+.feature-icon.gold{ background:rgba(212,160,23,.15); color:var(--gold); }
+.feature-icon.green{ background:rgba(34,197,94,.12); color:#22C55E; }
+.feature-icon.cyan{ background:rgba(6,182,212,.12); color:#06B6D4; }
+.feature-icon.red{ background:rgba(239,68,68,.12); color:#EF4444; }
+.feature-icon.purple{ background:rgba(139,92,246,.12); color:#8B5CF6; }
+
+.feature-card h4{
+    font-size:17.5px;
+    font-weight:700;
+    margin-bottom:10px;
+    color:var(--text);
+}
+
+.feature-card p{
+    font-size:14px;
+    color:var(--text-muted);
+    line-height:1.75;
+    margin:0;
+}
+
+/* ==========================
+   ABOUT
+========================== */
+
+#about{
+    background:var(--surface);
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+}
+
+#about p{
+    font-size:15.5px;
+    line-height:1.9;
+    color:var(--text-muted);
+}
+
+.about-visual{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.about-seal{
+    width:220px; height:220px;
+    border-radius:50%;
+    background:linear-gradient(145deg,var(--navy),var(--navy-soft));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 25px 60px rgba(11,30,61,.35);
+    position:relative;
+}
+.about-seal::before{
+    content:\"\";
+    position:absolute;
+    inset:10px;
+    border-radius:50%;
+    border:2px dashed rgba(212,160,23,.5);
+}
+.about-seal i{
+    font-size:64px;
+    background:linear-gradient(135deg,var(--gold-soft),var(--gold));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.about-checklist{
+    list-style:none;
+    padding:0;
+    margin:24px 0 0;
+}
+.about-checklist li{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    margin-bottom:12px;
+    font-size:14.5px;
+    color:var(--text-muted);
+}
+.about-checklist i{
+    color:#22C55E;
+    margin-top:2px;
+}
+
+/* ==========================
+   FOOTER
+========================== */
+
+footer{
+    background:var(--navy);
+    color:#C6D1E8;
+}
+
+footer h3{
+    font-size:20px;
+    color:#fff;
+    font-weight:700;
+}
+
+footer h5{
+    color:#fff;
+    font-size:14.5px;
+    font-weight:600;
+    margin-bottom:16px;
+}
+
+footer p, footer a{
+    font-size:14px;
+    color:#B9C4DC;
+}
+footer a{ text-decoration:none; transition:.2s; }
+footer a:hover{ color:var(--gold-soft); padding-left:3px; }
+
+.footer-social a{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:38px; height:38px;
+    border-radius:10px;
+    background:rgba(255,255,255,.06);
+    margin-right:8px;
+    color:#fff !important;
+}
+.footer-social a:hover{
+    background:var(--blue-bright);
+    transform:translateY(-3px);
+}
+
+/* ==========================
+   BACK TO TOP
+========================== */
+.back-to-top{
+    position:fixed;
+    bottom:26px;
+    right:26px;
+    width:46px; height:46px;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--blue-bright),var(--blue));
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 10px 25px rgba(37,99,235,.4);
+    cursor:pointer;
+    z-index:900;
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(10px);
+    transition:.3s;
+}
+.back-to-top.show{
+    opacity:1; visibility:visible; transform:translateY(0);
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media (max-width:991px){
+    .sidebar{
+        transform:translateX(-100%);
+    }
+    .sidebar.open{
+        transform:translateX(0);
+    }
+    .main{
+        margin-left:0;
+    }
+    .menu-toggle{
+        display:flex;
+    }
+    .hero{
+        padding-top:110px;
+        text-align:center;
+    }
+    .hero p{ margin-left:auto; margin-right:auto; }
+    .hero-stats{ justify-content:center; }
+    .hero-visual{ margin-top:50px; }
+    .hero-visual .card-float{ display:none; }
+}
+
+@media (max-width:575px){
+    .hero h1{ font-size:30px; }
+    section{ padding:64px 0; }
+}
+
+</style>
+
+<div id=\"preloader\"><div class=\"preload-ring\"></div></div>
+
+<div class=\"topbar\">
+    <div class=\"menu-toggle\" id=\"menuToggle\"><i class=\"bi bi-list\"></i></div>
+    <div class=\"theme-toggle\" id=\"themeToggle\" title=\"Toggle dark mode\">
+        <div class=\"knob\"><i class=\"bi bi-sun-fill\"></i></div>
+    </div>
+</div>
+
+<div class=\"sidebar-overlay\" id=\"sidebarOverlay\"></div>
+
+<div class=\"sidebar\" id=\"sidebar\">
+
+    <div class=\"logo\">
+        <div class=\"seal\"><i class=\"bi bi-mortarboard-fill\"></i></div>
+        <div>
+            <h2>PresOffice</h2>
+            <span>NORSU &middot; President\x27s Office</span>
+        </div>
+    </div>
+
+    <div class=\"sidebar-scroll\">
+        <ul>
+            <li><a href=\"#top\" class=\"nav-link active\" data-section=\"top\"><i class=\"bi bi-house-door-fill\"></i> Home</a></li>
+            <li><a href=\"#features\" class=\"nav-link\" data-section=\"features\"><i class=\"bi bi-grid-fill\"></i> Features</a></li>
+        </ul>
+
+        <div class=\"sidebar-section-label\">Documents</div>
+        <ul>
+            <li><a href=\"#\" class=\"sub-link\"><i class=\"bi bi-send-fill\"></i> Sent</a></li>
+            <li><a href=\"#\" class=\"sub-link\"><i class=\"bi bi-inbox-fill\"></i> Received</a></li>
+            <li><a href=\"#\" class=\"sub-link\"><i class=\"bi bi-file-earmark-fill\"></i> Files</a></li>
+            <li><a href=\"#\" class=\"sub-link\"><i class=\"bi bi-hourglass-split\"></i> Pending</a></li>
+            <li><a href=\"#\" class=\"sub-link\"><i class=\"bi bi-geo-alt-fill\"></i> Trace</a></li>
+        </ul>
+
+        <div class=\"sidebar-section-label\">General</div>
+        <ul>
+            <li><a href=\"#about\" class=\"nav-link\" data-section=\"about\"><i class=\"bi bi-info-circle-fill\"></i> About</a></li>
+            <li><a href=\"#contact\" class=\"nav-link\" data-section=\"contact\"><i class=\"bi bi-envelope-fill\"></i> Contact</a></li>
+        </ul>
+    </div>
+
+    <div class=\"sidebar-footer\">
+        &copy; <span id=\"year\"></span> NORSU PresOffice
+    </div>
+
+</div>
+
+<div class=\"main\" id=\"top\">
+
+<section class=\"hero\">
+
+<div class=\"container-fluid px-5\">
+
+<div class=\"row align-items-center\">
+
+<div class=\"col-lg-6\">
+
+<div class=\"eyebrow\"><span class=\"dot\"></span> System Online</div>
+
+<h1>
+Manage University Documents<br>
+<span class=\"accent\">Securely & Efficiently</span>
+</h1>
+
+<p>
+PresOffice is the official document management platform of the NORSU
+President\x27s Office — helping the university store, organize, search,
+and track files with speed and accountability.
+</p>
+
+<div>
+<a href=\"#features\" class=\"btn btn-primary me-2\">
+Explore Features <i class=\"bi bi-arrow-right ms-1\"></i>
+</a>
+
+<a href=\"#about\" class=\"btn btn-outline-primary\">
+Learn More
+</a>
+</div>
+
+<div class=\"hero-stats\">
+    <div class=\"stat\"><h3>100%</h3><span>Digital Records</span></div>
+    <div class=\"stat\"><h3>24/7</h3><span>Document Tracking</span></div>
+    <div class=\"stat\"><h3>Secure</h3><span>Role-Based Access</span></div>
+</div>
+
+</div>
+
+<div class=\"col-lg-6 text-center\">
+
+<div class=\"hero-visual\">
+
+<div class=\"card-float f1\">
+    <i class=\"bi bi-shield-check text-primary\"></i>
+    <div><small>Status</small><strong>Secured</strong></div>
+</div>
+
+<div class=\"card-float f2\">
+    <i class=\"bi bi-check-circle-fill text-success\"></i>
+    <div><small>Document</small><strong>Approved</strong></div>
+</div>
+
+<div class=\"hero-img-wrap\">
+<img
+src=\"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900\"
+alt=\"Document Management\">
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!-- ==========================
+     FEATURES
+========================== -->
+
+<section id=\"features\">
+
+    <div class=\"container-fluid px-5\">
+
+        <div class=\"text-center mb-5 reveal\">
+
+            <span class=\"section-tag\">Capabilities</span>
+            <h2>System Features</h2>
+
+            <p class=\"text-muted mt-2\">
+                Everything the Office needs to manage documents securely, in one place.
+            </p>
+
+        </div>
+
+        <div class=\"row g-4\">
+
+            <div class=\"col-lg-4 col-md-6 reveal\">
+                <div class=\"feature-card h-100\">
+                    <div class=\"feature-icon blue\"><i class=\"bi bi-cloud-arrow-up-fill\"></i></div>
+                    <h4>File Upload</h4>
+                    <p>Upload documents securely with support for multiple file formats and large file sizes.</p>
+                </div>
+            </div>
+
+            <div class=\"col-lg-4 col-md-6 reveal\">
+                <div class=\"feature-card h-100\">
+                    <div class=\"feature-icon gold\"><i class=\"bi bi-folder-fill\"></i></div>
+                    <h4>Organization</h4>
+                    <p>Organize files into folders and categories for quick access and easy management.</p>
+                </div>
+            </div>
+
+            <div class=\"col-lg-4 col-md-6 reveal\">
+                <div class=\"feature-card h-100\">
+                    <div class=\"feature-icon green\"><i class=\"bi bi-search\"></i></div>
+                    <h4>Advanced Search</h4>
+                    <p>Instantly locate documents using keywords, categories, dates, or departments.</p>
+                </div>
+            </div>
+
+            <div class=\"col-lg-4 col-md-6 reveal\">
+                <div class=\"feature-card h-100\">
+                    <div class=\"feature-icon cyan\"><i class=\"bi bi-people-fill\"></i></div>
+                    <h4>User Management</h4>
+                    <p>Manage administrators, staff, departments, and permissions from one place.</p>
+                </div>
+            </div>
+
+            <div class=\"col-lg-4 col-md-6 reveal\">
+                <div class=\"feature-card h-100\">
+                    <div class=\"feature-icon red\"><i class=\"bi bi-clock-history\"></i></div>
+                    <h4>Activity Logs</h4>
+                    <p>Monitor user activities with complete audit trails and document history.</p>
+                </div>
+            </div>
+
+            <div class=\"col-lg-4 col-md-6 reveal\">
+                <div class=\"feature-card h-100\">
+                    <div class=\"feature-icon purple\"><i class=\"bi bi-shield-lock-fill\"></i></div>
+                    <h4>Security</h4>
+                    <p>Secure every document using authentication, encryption, and role-based access control.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================
+     ABOUT
+========================== -->
+
+<section id=\"about\">
+
+    <div class=\"container-fluid px-5\">
+
+        <div class=\"row align-items-center g-5\">
+
+            <div class=\"col-lg-6 reveal\">
+
+                <span class=\"section-tag\">Who We Are</span>
+                <h2 class=\"mb-4\">About PresOffice</h2>
+
+                <p>
+                    PresOffice is the official document management platform developed
+                    for the Negros Oriental State University President\x27s Office. It
+                    centralizes document storage, improves collaboration, and
+                    simplifies file retrieval across the university.
+                </p>
+
+                <p>
+                    Built for the Office\x27s daily operations, PresOffice enhances
+                    productivity through role-based permissions, secure file storage,
+                    document versioning, and comprehensive activity monitoring.
+                </p>
+
+                <ul class=\"about-checklist\">
+                    <li><i class=\"bi bi-check-circle-fill\"></i> Centralized, searchable document archive</li>
+                    <li><i class=\"bi bi-check-circle-fill\"></i> Full audit trail for every file action</li>
+                    <li><i class=\"bi bi-check-circle-fill\"></i> Encrypted storage & role-based access</li>
+                </ul>
+
+            </div>
+
+            <div class=\"col-lg-6 about-visual reveal\">
+                <div class=\"about-seal\">
+                    <i class=\"bi bi-folder-check\"></i>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================
+     FOOTER
+========================== -->
+
+<footer id=\"contact\" class=\"py-5\">
+
+    <div class=\"container-fluid px-5\">
+
+        <div class=\"row g-4\">
+
+            <div class=\"col-md-4\">
+
+                <h3>PresOffice</h3>
+
+                <p>
+                    Official document management system of the NORSU President\x27s Office.
+                </p>
+
+                <div class=\"footer-social mt-3\">
+                    <a href=\"#\"><i class=\"bi bi-facebook\"></i></a>
+                    <a href=\"#\"><i class=\"bi bi-globe\"></i></a>
+                    <a href=\"#\"><i class=\"bi bi-envelope-fill\"></i></a>
+                </div>
+
+            </div>
+
+            <div class=\"col-md-4\">
+
+                <h5>Quick Links</h5>
+
+                <p><a href=\"#top\">Home</a></p>
+                <p><a href=\"#features\">Features</a></p>
+                <p><a href=\"#about\">About</a></p>
+
+            </div>
+
+            <div class=\"col-md-4\">
+
+                <h5>Contact</h5>
+
+                <p>
+                    <i class=\"bi bi-envelope-fill\"></i>
+                    support@presoffice.norsu.edu.ph
+                </p>
+
+                <p>
+                    <i class=\"bi bi-telephone-fill\"></i>
+                    (+63) 35 522-5050
+                </p>
+
+                <p>
+                    <i class=\"bi bi-geo-alt-fill\"></i>
+                    Kagawasan Avenue, Dumaguete City
+                </p>
+
+            </div>
+
+        </div>
+
+        <hr class=\"border-secondary my-4\" style=\"opacity:.15\">
+
+        <div class=\"text-center\" style=\"font-size:13px; opacity:.8;\">
+
+            &copy; <span id=\"year2\"></span> PresOffice &middot; Negros Oriental State University. All Rights Reserved.
+
+        </div>
+
+    </div>
+
+</footer>
+
+</div>
+
+<div class=\"back-to-top\" id=\"backToTop\"><i class=\"bi bi-arrow-up\"></i></div>
+
+<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"></script>
+<script>
+document.addEventListener(\x27DOMContentLoaded\x27, function(){
+
+    // Preloader
+    window.addEventListener(\x27load\x27, function(){
+        var pre = document.getElementById(\x27preloader\x27);
+        setTimeout(function(){ pre.classList.add(\x27hide\x27); }, 250);
+    });
+
+    document.getElementById(\x27year\x27).textContent = new Date().getFullYear();
+    document.getElementById(\x27year2\x27).textContent = new Date().getFullYear();
+
+    /* THEME TOGGLE — persists via localStorage */
+    var root = document.documentElement;
+    var toggle = document.getElementById(\x27themeToggle\x27);
+    var knobIcon = toggle.querySelector(\x27.knob i\x27);
+    var saved = localStorage.getItem(\x27presoffice-theme\x27);
+    var systemDark = window.matchMedia && window.matchMedia(\x27(prefers-color-scheme: dark)\x27).matches;
+    var initial = saved || (systemDark ? \x27dark\x27 : \x27light\x27);
+    setTheme(initial);
+
+    toggle.addEventListener(\x27click\x27, function(){
+        var current = root.getAttribute(\x27data-theme\x27);
+        setTheme(current === \x27dark\x27 ? \x27light\x27 : \x27dark\x27);
+    });
+
+    function setTheme(mode){
+        root.setAttribute(\x27data-theme\x27, mode);
+        localStorage.setItem(\x27presoffice-theme\x27, mode);
+        knobIcon.className = mode === \x27dark\x27 ? \x27bi bi-moon-stars-fill\x27 : \x27bi bi-sun-fill\x27;
+    }
+
+    /* MOBILE SIDEBAR */
+    var sidebar = document.getElementById(\x27sidebar\x27);
+    var menuToggle = document.getElementById(\x27menuToggle\x27);
+    var overlay = document.getElementById(\x27sidebarOverlay\x27);
+
+    menuToggle.addEventListener(\x27click\x27, function(){
+        sidebar.classList.add(\x27open\x27);
+        overlay.classList.add(\x27show\x27);
+    });
+    overlay.addEventListener(\x27click\x27, closeSidebar);
+    function closeSidebar(){
+        sidebar.classList.remove(\x27open\x27);
+        overlay.classList.remove(\x27show\x27);
+    }
+    document.querySelectorAll(\x27.sidebar a\x27).forEach(function(a){
+        a.addEventListener(\x27click\x27, closeSidebar);
+    });
+
+    /* ACTIVE LINK ON SCROLL */
+    var navLinks = document.querySelectorAll(\x27.nav-link\x27);
+    var sections = [\x27top\x27,\x27features\x27,\x27about\x27,\x27contact\x27].map(function(id){
+        return document.getElementById(id);
+    }).filter(Boolean);
+
+    function onScroll(){
+        var pos = window.scrollY + 120;
+        var current = \x27top\x27;
+        sections.forEach(function(sec){
+            if(sec.offsetTop <= pos) current = sec.id;
+        });
+        navLinks.forEach(function(link){
+            link.classList.toggle(\x27active\x27, link.dataset.section === current);
+        });
+
+        // back to top
+        document.getElementById(\x27backToTop\x27).classList.toggle(\x27show\x27, window.scrollY > 500);
+    }
+    window.addEventListener(\x27scroll\x27, onScroll);
+    onScroll();
+
+    document.getElementById(\x27backToTop\x27).addEventListener(\x27click\x27, function(){
+        window.scrollTo({top:0, behavior:\x27smooth\x27});
+    });
+
+    /* SCROLL REVEAL */
+    var revealEls = document.querySelectorAll(\x27.reveal\x27);
+    var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+            if(entry.isIntersecting){
+                entry.target.classList.add(\x27in\x27);
+                io.unobserve(entry.target);
+            }
+        });
+    }, { threshold:0.15 });
+    revealEls.forEach(function(el){ io.observe(el); });
+
+});
+</script>
+
+</body>
+</html>
+
+{% endblock %}", "landing_page/index.html.twig", "C:\\Users\\Public\\PresOffice\\app\\templates\\landing_page\\index.html.twig");
+    }
+}
