@@ -1,0 +1,41 @@
+services:
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${PresOffice_root_password}
+      MYSQL_DATABASE: ${PresOffice_db}
+      MYSQL_USER: ${PresOffice_user}
+      MYSQL_PASSWORD: ${PresOffice_password}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - PresOffice_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: ${PresOffice_user}
+      PMA_PASSWORD: ${PresOffice_password}
+    ports:
+      - "8080:80"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - PresOffice_network
+
+volumes:
+  mysql_data:
+
+networks:
+  PresOffice_network:
