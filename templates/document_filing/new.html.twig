@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New DocumentFiling{% endblock %}
+
+{% block body %}
+    <h1>Create new DocumentFiling</h1>
+
+    {{ include('document_filing/_form.html.twig') }}
+
+    <a href="{{ path('app_document_filing_index') }}">back to list</a>
+{% endblock %}

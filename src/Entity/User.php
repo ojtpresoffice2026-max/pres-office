@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\Table(name: '`user`')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -26,7 +27,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     private ?string $username = null;
 
+    /**
+     * Hashed password — stored. Never validate this field directly.
+     */
     #[ORM\Column]
+    private ?string $password = null;
+
+    /**
+     * Raw password typed by the user — NOT persisted, only used in forms.
+     */
     #[Assert\NotBlank(message: 'Password should not be blank.')]
     #[Assert\Length(
         min: 8,
@@ -34,7 +43,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         minMessage: 'Password should be at least {{ limit }} characters long.',
         maxMessage: 'Password should not exceed {{ limit }} characters.'
     )]
-    private ?string $password = null;
+    private ?string $plainPassword = null;
 
     #[ORM\Column(length: 20)]
     #[Assert\NotBlank(message: 'Role should not be blank.')]
@@ -71,6 +80,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(?string $plainPassword): static
+    {
+        $this->plainPassword = $plainPassword;
+        return $this;
+    }
+
     public function getRole(): ?string
     {
         return $this->role;
@@ -83,16 +103,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * Required by UserInterface — Symfony Security expects an array.
+     * Required by UserInterface — Symfony Security expects an array of role strings.
      */
     public function getRoles(): array
     {
         $roles = [$this->role ?? 'ROLE_USER'];
+        $roles[] = 'ROLE_USER';
         return array_unique($roles);
     }
 
     /**
-     * Required by UserInterface — the unique identifier used to load the user.
+     * Required by UserInterface — the identifier Symfony uses to load the user.
      */
     public function getUserIdentifier(): string
     {
@@ -100,10 +121,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * Required by UserInterface — clear any temporary sensitive data.
+     * Required by UserInterface — clear any temporary sensitive data after auth.
      */
     public function eraseCredentials(): void
     {
-        // If you store any plain-text password temporarily, clear it here.
+        $this->plainPassword = null;
     }
 }

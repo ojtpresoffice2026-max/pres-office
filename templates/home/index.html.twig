@@ -36,6 +36,7 @@
     --shadow:0 10px 30px rgba(15,30,60,.08);
     --shadow-lg:0 20px 45px rgba(15,30,60,.14);
     --radius:16px;
+    --topbar-h:64px;
 }
 
 [data-theme="dark"]{
@@ -53,16 +54,17 @@
 
 *{ box-sizing:border-box; }
 
-html{ scroll-behavior:smooth; }
-
 body{
     margin:0;
     padding:0;
     font-family:"Inter",-apple-system,"Segoe UI",sans-serif;
+    font-size:13px;          /* was default */
+    line-height:1.5;
     background:var(--bg);
     color:var(--text);
     overflow-x:hidden;
-    transition:background .35s ease, color .35s ease;
+    transition:background .35s ease,color .35s ease;
+    height:100vh;
 }
 
 h1,h2,h3,h4,h5,.brand-font{
@@ -100,35 +102,51 @@ h1,h2,h3,h4,h5,.brand-font{
 ========================== */
 .topbar{
     position:fixed;
-    top:0; right:0; left:0;
-    height:64px;
+    top:0; right:0; left:250px;
+    height:var(--topbar-h);
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 20px 0 16px;
+    padding:0 24px;
     z-index:1100;
-    pointer-events:none;
+    background:var(--surface);
+    border-bottom:1px solid var(--border);
+    transition:left .35s ease, background .35s ease;
 }
-.topbar > *{ pointer-events:auto; }
+
+.page-title-bar{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+.page-title-bar h4{
+    margin:0;
+    font-size:17px;
+    font-weight:700;
+    color:var(--text);
+}
+.page-title-bar .crumb{
+    font-size:12px;
+    color:var(--text-muted);
+    font-weight:500;
+}
 
 .menu-toggle{
     display:none;
-    width:44px; height:44px;
-    border-radius:12px;
-    background:var(--surface);
+    width:40px; height:40px;
+    border-radius:10px;
+    background:var(--surface-2);
     border:1px solid var(--border);
-    box-shadow:var(--shadow);
     align-items:center;
     justify-content:center;
     color:var(--text);
-    font-size:20px;
+    font-size:18px;
     cursor:pointer;
-    margin-top:12px;
 }
 
+.topbar-right{ display:flex; align-items:center; gap:14px; }
+
 .theme-toggle{
-    margin-left:auto;
-    margin-top:12px;
     width:52px;
     height:30px;
     border-radius:30px;
@@ -139,8 +157,8 @@ h1,h2,h3,h4,h5,.brand-font{
     display:flex;
     align-items:center;
     padding:3px;
-    box-shadow:var(--shadow);
     transition:.3s;
+    flex-shrink:0;
 }
 .theme-toggle .knob{
     width:22px; height:22px;
@@ -161,26 +179,36 @@ h1,h2,h3,h4,h5,.brand-font{
 ========================== */
 
 .sidebar{
-    position:fixed;
-    top:0;
-    left:0;
-    width:250px;
-    height:100vh;
-    background:var(--sidebar-bg);
-    display:flex;
-    flex-direction:column;
-    box-shadow:5px 0 25px rgba(0,0,0,.2);
-    z-index:1050;
-    transition:transform .35s ease, background .35s ease;
-    border-right:1px solid rgba(255,255,255,.05);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+
+    background: var(--sidebar-bg);
+    color: var(--sidebar-text);
+
+    display: flex;
+    flex-direction: column;
+
+    border-right: 1px solid rgba(255,255,255,.08);
+
+    z-index: 2000; /* increase this */
+
+    transition:
+        background .35s ease,
+        color .35s ease,
+        transform .35s ease;
 }
 
 .logo{
-    padding:24px 22px;
+    padding:20px 22px;
     border-bottom:1px solid rgba(255,255,255,.08);
     display:flex;
     align-items:center;
     gap:12px;
+    flex-shrink:0;
+    height:var(--topbar-h);
 }
 
 .logo .seal{
@@ -196,11 +224,12 @@ h1,h2,h3,h4,h5,.brand-font{
 .logo .seal i{ color:#fff; font-size:16px; }
 
 .logo h2{
-    margin:0;
-    font-size:19px;
-    color:#fff;
+    font-size:16px;
     font-weight:700;
-    letter-spacing:.2px;
+}
+
+.logo span{
+    font-size:9px;
 }
 .logo span{
     display:block;
@@ -262,7 +291,8 @@ h1,h2,h3,h4,h5,.brand-font{
 }
 
 .nav-item > a.active,
-.nav-parent.active{
+.nav-parent.active,
+.sub-menu a.active{
     background:linear-gradient(135deg,var(--blue-bright),var(--blue));
     color:#fff;
     box-shadow:0 4px 14px rgba(37,99,235,.4);
@@ -285,6 +315,7 @@ h1,h2,h3,h4,h5,.brand-font{
     text-decoration:none;
     border-radius:8px;
     transition:.2s;
+    cursor:pointer;
 }
 .sub-menu a:hover{
     background:rgba(255,255,255,.05);
@@ -297,6 +328,7 @@ h1,h2,h3,h4,h5,.brand-font{
     border-top:1px solid rgba(255,255,255,.08);
     font-size:11.5px;
     color:rgba(185,196,220,.5);
+    flex-shrink:0;
 }
 
 .sidebar-overlay{
@@ -310,51 +342,40 @@ h1,h2,h3,h4,h5,.brand-font{
 .sidebar-overlay.show{ display:block; }
 
 /* ==========================
-   MAIN
+   MAIN / APP SHELL
+   Everything renders inside a fixed viewport frame.
+   Only the active .app-page is shown — no cross-section
+   scrolling, switching is instant via the sidebar.
 ========================== */
 
 .main{
     margin-left:250px;
+    padding-top:var(--topbar-h);
+    height:100vh;
     transition:margin .35s ease;
 }
 
+.app-page{
+    display:none;
+    height:calc(100vh - var(--topbar-h));
+    overflow-y:auto;
+    animation:pageIn .35s ease;
+}
+.app-page.active{ display:block; }
+
+@keyframes pageIn{
+    from{ opacity:0; transform:translateY(10px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+
 /* ==========================
-   HERO
+   HERO (Home page intro strip)
 ========================== */
 
 .hero{
-    min-height:88vh;
-    display:flex;
-    align-items:center;
-    padding:100px 0 60px;
+    padding:40px 0 10px;
     position:relative;
-    overflow:hidden;
 }
-
-.hero::before{
-    content:"";
-    position:absolute;
-    top:-20%;
-    right:-10%;
-    width:600px;
-    height:600px;
-    background:radial-gradient(circle, rgba(37,99,235,.12), transparent 70%);
-    border-radius:50%;
-    z-index:0;
-}
-.hero::after{
-    content:"";
-    position:absolute;
-    bottom:-15%;
-    left:5%;
-    width:400px;
-    height:400px;
-    background:radial-gradient(circle, rgba(212,160,23,.10), transparent 70%);
-    border-radius:50%;
-    z-index:0;
-}
-
-.hero .container-fluid{ position:relative; z-index:1; }
 
 .eyebrow{
     display:inline-flex;
@@ -377,10 +398,10 @@ h1,h2,h3,h4,h5,.brand-font{
 }
 
 .hero h1{
-    font-size:clamp(32px,4.2vw,48px);
+    font-size:clamp(26px,3vw,36px);
     font-weight:800;
     color:var(--text);
-    line-height:1.18;
+    line-height:1.2;
     letter-spacing:-.5px;
 }
 
@@ -392,65 +413,34 @@ h1,h2,h3,h4,h5,.brand-font{
 }
 
 .hero p{
-    font-size:16.5px;
+    font-size:15.5px;
     color:var(--text-muted);
-    line-height:1.85;
-    margin:22px 0 32px;
-    max-width:520px;
+    line-height:1.75;
+    margin:16px 0 0;
+    max-width:620px;
 }
 
 .hero-stats{
     display:flex;
     gap:30px;
-    margin-top:40px;
+    margin-top:28px;
     flex-wrap:wrap;
 }
 .hero-stats .stat h3{
-    font-size:26px;
-    font-weight:800;
-    margin:0;
-    color:var(--text);
+    font-size:20px;
 }
+
 .hero-stats .stat span{
-    font-size:12.5px;
-    color:var(--text-muted);
-    font-weight:500;
+    font-size:11px;
 }
 
-.hero-visual{ position:relative; }
-.hero-visual .card-float{
-    position:absolute;
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:14px;
-    box-shadow:var(--shadow-lg);
-    padding:14px 18px;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    animation:float 4s ease-in-out infinite;
-    z-index:2;
-}
-.hero-visual .card-float.f1{ top:8%; left:-6%; animation-delay:0s; }
-.hero-visual .card-float.f2{ bottom:10%; right:-4%; animation-delay:1.2s; }
-.hero-visual .card-float i{ font-size:20px; }
-.hero-visual .card-float small{ display:block; color:var(--text-muted); font-size:11px; }
-.hero-visual .card-float strong{ font-size:13.5px; }
-
-@keyframes float{
-    0%,100%{ transform:translateY(0); }
-    50%{ transform:translateY(-12px); }
+.stat-mini .num{
+    font-size:18px;
 }
 
-.hero-img-wrap{
-    border-radius:20px;
-    overflow:hidden;
-    box-shadow:var(--shadow-lg);
-    position:relative;
-    border:1px solid var(--border);
+.stat-mini .lbl{
+    font-size:11px;
 }
-.hero-img-wrap img{ width:100%; display:block; transition:transform .5s ease; }
-.hero-img-wrap:hover img{ transform:scale(1.04); }
 
 /* ==========================
    BUTTONS
@@ -486,10 +476,10 @@ h1,h2,h3,h4,h5,.brand-font{
 }
 
 /* ==========================
-   SECTIONS
+   SECTIONS (inside each page)
 ========================== */
 
-section{ padding:80px 0; position:relative; }
+.page-section{ padding:32px 0; position:relative; }
 
 .section-tag{
     display:inline-block;
@@ -504,25 +494,21 @@ section{ padding:80px 0; position:relative; }
     margin-bottom:14px;
 }
 
-section h2{
-    font-size:clamp(24px,3vw,32px);
-    font-weight:800;
-    color:var(--text);
-    letter-spacing:-.3px;
+.page-section h2{
+    font-size:24px;
 }
 
-.reveal{
-    opacity:0;
-    transform:translateY(28px);
-    transition:opacity .7s ease, transform .7s ease;
+.dash-card h5{
+    font-size:14px;
 }
-.reveal.in{ opacity:1; transform:translateY(0); }
+
+.dash-card .dash-sub{
+    font-size:11px;
+}
 
 /* ==========================
-   DASHBOARD (now lives on Home)
+   DASHBOARD (lives on Home)
 ========================== */
-
-#dashboard{ background:var(--surface-2); }
 
 .dash-badge{
     display:inline-flex;
@@ -645,6 +631,7 @@ table.log-table tr:hover td{ background:var(--surface-2); }
     font-size:13.5px;
     font-weight:600;
     transition:.2s;
+    cursor:pointer;
 }
 .quick-actions a:hover{
     border-color:var(--blue-bright);
@@ -655,15 +642,9 @@ table.log-table tr:hover td{ background:var(--surface-2); }
 .quick-actions a i{ color:var(--blue-bright); }
 
 /* ==========================
-   GENERIC PLACEHOLDER SECTIONS
+   GENERIC PLACEHOLDER SUB-PAGES
    (Indexing / Indexed Records / Filing / Reports / Maintenance / Account)
 ========================== */
-
-.placeholder-section{
-    background:var(--surface);
-    border-top:1px solid var(--border);
-}
-.placeholder-section:nth-of-type(even){ background:var(--surface-2); }
 
 .placeholder-card{
     background:var(--surface);
@@ -713,12 +694,11 @@ table.log-table tr:hover td{ background:var(--surface-2); }
    ABOUT
 ========================== */
 
-#about{ background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
-#about p{ font-size:15.5px; line-height:1.9; color:var(--text-muted); }
+#page-about p{ font-size:15.5px; line-height:1.9; color:var(--text-muted); }
 
 .about-visual{ position:relative; display:flex; align-items:center; justify-content:center; }
 .about-seal{
-    width:220px; height:220px;
+    width:200px; height:200px;
     border-radius:50%;
     background:linear-gradient(145deg,var(--navy),var(--navy-soft));
     display:flex; align-items:center; justify-content:center;
@@ -732,7 +712,7 @@ table.log-table tr:hover td{ background:var(--surface-2); }
     border:2px dashed rgba(212,160,23,.5);
 }
 .about-seal i{
-    font-size:64px;
+    font-size:58px;
     background:linear-gradient(135deg,var(--gold-soft),var(--gold));
     -webkit-background-clip:text; background-clip:text; color:transparent;
 }
@@ -742,15 +722,20 @@ table.log-table tr:hover td{ background:var(--surface-2); }
 .about-checklist i{ color:#22C55E; margin-top:2px; }
 
 /* ==========================
-   FOOTER
+   CONTACT / FOOTER PAGE
 ========================== */
 
-footer{ background:var(--navy); color:#C6D1E8; }
-footer h3{ font-size:20px; color:#fff; font-weight:700; }
-footer h5{ color:#fff; font-size:14.5px; font-weight:600; margin-bottom:16px; }
-footer p, footer a{ font-size:14px; color:#B9C4DC; }
-footer a{ text-decoration:none; transition:.2s; }
-footer a:hover{ color:var(--gold-soft); padding-left:3px; }
+.contact-card{
+    background:var(--navy);
+    color:#C6D1E8;
+    border-radius:var(--radius);
+    padding:36px;
+}
+.contact-card h3{ font-size:20px; color:#fff; font-weight:700; }
+.contact-card h5{ color:#fff; font-size:14.5px; font-weight:600; margin-bottom:16px; }
+.contact-card p, .contact-card a{ font-size:14px; color:#B9C4DC; }
+.contact-card a{ text-decoration:none; transition:.2s; }
+.contact-card a:hover{ color:var(--gold-soft); padding-left:3px; }
 
 .footer-social a{
     display:inline-flex; align-items:center; justify-content:center;
@@ -762,22 +747,6 @@ footer a:hover{ color:var(--gold-soft); padding-left:3px; }
 .footer-social a:hover{ background:var(--blue-bright); transform:translateY(-3px); }
 
 /* ==========================
-   BACK TO TOP
-========================== */
-.back-to-top{
-    position:fixed; bottom:26px; right:26px;
-    width:46px; height:46px; border-radius:50%;
-    background:linear-gradient(135deg,var(--blue-bright),var(--blue));
-    color:#fff;
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:0 10px 25px rgba(37,99,235,.4);
-    cursor:pointer; z-index:900;
-    opacity:0; visibility:hidden; transform:translateY(10px);
-    transition:.3s;
-}
-.back-to-top.show{ opacity:1; visibility:visible; transform:translateY(0); }
-
-/* ==========================
    RESPONSIVE
 ========================== */
 
@@ -785,17 +754,13 @@ footer a:hover{ color:var(--gold-soft); padding-left:3px; }
     .sidebar{ transform:translateX(-100%); }
     .sidebar.open{ transform:translateX(0); }
     .main{ margin-left:0; }
+    .topbar{ left:0; }
     .menu-toggle{ display:flex; }
-    .hero{ padding-top:110px; text-align:center; }
-    .hero p{ margin-left:auto; margin-right:auto; }
-    .hero-stats{ justify-content:center; }
-    .hero-visual{ margin-top:50px; }
-    .hero-visual .card-float{ display:none; }
 }
 
 @media (max-width:575px){
-    .hero h1{ font-size:30px; }
-    section{ padding:56px 0; }
+    .hero h1{ font-size:26px; }
+    .page-section{ padding:24px 0; }
 }
 
 </style>
@@ -803,9 +768,17 @@ footer a:hover{ color:var(--gold-soft); padding-left:3px; }
 <div id="preloader"><div class="preload-ring"></div></div>
 
 <div class="topbar">
-    <div class="menu-toggle" id="menuToggle"><i class="bi bi-list"></i></div>
-    <div class="theme-toggle" id="themeToggle" title="Toggle dark mode">
-        <div class="knob"><i class="bi bi-sun-fill"></i></div>
+    <div class="page-title-bar">
+        <div class="menu-toggle" id="menuToggle"><i class="bi bi-list"></i></div>
+        <div>
+            <h4 id="pageTitleText">Home</h4>
+            <div class="crumb" id="pageCrumbText">Overview</div>
+        </div>
+    </div>
+    <div class="topbar-right">
+        <div class="theme-toggle" id="themeToggle" title="Toggle dark mode">
+            <div class="knob"><i class="bi bi-sun-fill"></i></div>
+        </div>
     </div>
 </div>
 
@@ -826,14 +799,14 @@ footer a:hover{ color:var(--gold-soft); padding-left:3px; }
 
             <!-- HOME -->
             <li class="nav-item">
-                <a href="#top" class="nav-link active" data-section="top">
+                <a class="nav-link active" data-page="home" data-title="Home" data-crumb="Overview">
                     <i class="bi bi-house-door-fill"></i> Home
                 </a>
             </li>
 
             <!-- ACTIVITY / AUDIT LOGS -->
             <li class="nav-item">
-                <a href="#activity-logs" class="nav-link" data-section="activity-logs">
+                <a class="nav-link" data-page="activity-logs" data-title="Activity Logs" data-crumb="Audit trail">
                     <i class="bi bi-clock-history"></i> Activity Logs
                 </a>
             </li>
@@ -844,9 +817,9 @@ footer a:hover{ color:var(--gold-soft); padding-left:3px; }
                     <i class="bi bi-pencil-square"></i> Indexing <i class="bi bi-chevron-right chevron"></i>
                 </div>
                 <div class="sub-menu" id="menu-indexing">
-                    <a href="#indexing"><i class="bi bi-dot"></i> New Index</a>
-                    <a href="#indexing"><i class="bi bi-dot"></i> Indexed Records</a>
-                    <a href="#indexing"><i class="bi bi-dot"></i> Search Document</a>
+                    <a data-page="indexing" data-title="Indexing" data-crumb="New Index"><i class="bi bi-dot"></i> New Index</a>
+                    <a data-page="indexing" data-title="Indexing" data-crumb="Indexed Records"><i class="bi bi-dot"></i> Indexed Records</a>
+                    <a data-page="indexing" data-title="Indexing" data-crumb="Search Document"><i class="bi bi-dot"></i> Search Document</a>
                 </div>
             </li>
 
@@ -856,10 +829,10 @@ footer a:hover{ color:var(--gold-soft); padding-left:3px; }
                     <i class="bi bi-folder2-open"></i> Indexed Records <i class="bi bi-chevron-right chevron"></i>
                 </div>
                 <div class="sub-menu" id="menu-records">
-                    <a href="#records"><i class="bi bi-dot"></i> View All Records</a>
-                    <a href="#records"><i class="bi bi-dot"></i> Advanced Search</a>
-                    <a href="#records"><i class="bi bi-dot"></i> Record Details</a>
-                    <a href="#records"><i class="bi bi-dot"></i> Borrowing History</a>
+                    <a data-page="records" data-title="Indexed Records" data-crumb="View All Records"><i class="bi bi-dot"></i> View All Records</a>
+                    <a data-page="records" data-title="Indexed Records" data-crumb="Advanced Search"><i class="bi bi-dot"></i> Advanced Search</a>
+                    <a data-page="records" data-title="Indexed Records" data-crumb="Record Details"><i class="bi bi-dot"></i> Record Details</a>
+                    <a data-page="records" data-title="Indexed Records" data-crumb="Borrowing History"><i class="bi bi-dot"></i> Borrowing History</a>
                 </div>
             </li>
 
@@ -869,11 +842,11 @@ footer a:hover{ color:var(--gold-soft); padding-left:3px; }
                     <i class="bi bi-archive-fill"></i> Filing <i class="bi bi-chevron-right chevron"></i>
                 </div>
                 <div class="sub-menu" id="menu-filing">
-                    <a href="#filing"><i class="bi bi-dot"></i> Cabinets</a>
-                    <a href="#filing"><i class="bi bi-dot"></i> Shelves / Drawers</a>
-                    <a href="#filing"><i class="bi bi-dot"></i> Folders</a>
-                    <a href="#filing"><i class="bi bi-dot"></i> Archive Boxes</a>
-                    <a href="#filing"><i class="bi bi-dot"></i> Transfer History</a>
+                    <a data-page="filing" data-title="Filing" data-crumb="Cabinets"><i class="bi bi-dot"></i> Cabinets</a>
+                    <a data-page="filing" data-title="Filing" data-crumb="Shelves / Drawers"><i class="bi bi-dot"></i> Shelves / Drawers</a>
+                    <a data-page="filing" data-title="Filing" data-crumb="Folders"><i class="bi bi-dot"></i> Folders</a>
+                    <a data-page="filing" data-title="Filing" data-crumb="Archive Boxes"><i class="bi bi-dot"></i> Archive Boxes</a>
+                    <a data-page="filing" data-title="Filing" data-crumb="Transfer History"><i class="bi bi-dot"></i> Transfer History</a>
                 </div>
             </li>
 
@@ -883,10 +856,10 @@ footer a:hover{ color:var(--gold-soft); padding-left:3px; }
                     <i class="bi bi-bar-chart-fill"></i> Reports <i class="bi bi-chevron-right chevron"></i>
                 </div>
                 <div class="sub-menu" id="menu-reports">
-                    <a href="#reports"><i class="bi bi-dot"></i> Monthly Indexed Records</a>
-                    <a href="#reports"><i class="bi bi-dot"></i> Category Report</a>
-                    <a href="#reports"><i class="bi bi-dot"></i> Storage Utilization</a>
-                    <a href="#reports"><i class="bi bi-dot"></i> Transfer Report</a>
+                    <a data-page="reports" data-title="Reports" data-crumb="Monthly Indexed Records"><i class="bi bi-dot"></i> Monthly Indexed Records</a>
+                    <a data-page="reports" data-title="Reports" data-crumb="Category Report"><i class="bi bi-dot"></i> Category Report</a>
+                    <a data-page="reports" data-title="Reports" data-crumb="Storage Utilization"><i class="bi bi-dot"></i> Storage Utilization</a>
+                    <a data-page="reports" data-title="Reports" data-crumb="Transfer Report"><i class="bi bi-dot"></i> Transfer Report</a>
                 </div>
             </li>
 
@@ -896,38 +869,50 @@ footer a:hover{ color:var(--gold-soft); padding-left:3px; }
                     <i class="bi bi-gear-fill"></i> Maintenance <i class="bi bi-chevron-right chevron"></i>
                 </div>
                 <div class="sub-menu" id="menu-maintenance">
-                    <a href="#maintenance"><i class="bi bi-dot"></i> Categories</a>
-                    <a href="#maintenance"><i class="bi bi-dot"></i> Document Types</a>
-                    <a href="#maintenance"><i class="bi bi-dot"></i> Offices / Agencies</a>
-                    <a href="#maintenance"><i class="bi bi-dot"></i> Cabinets</a>
-                    <a href="#maintenance"><i class="bi bi-dot"></i> Shelves / Drawers</a>
-                    <a href="#maintenance"><i class="bi bi-dot"></i> Folders</a>
-                    <a href="#maintenance"><i class="bi bi-dot"></i> Archive Boxes</a>
-                    <a href="#maintenance"><i class="bi bi-dot"></i> Users</a>
-                    <a href="#maintenance"><i class="bi bi-dot"></i> Roles</a>
+                    <a data-page="maintenance" data-title="Maintenance" data-crumb="Categories"><i class="bi bi-dot"></i> Categories</a>
+                    <a data-page="maintenance" data-title="Maintenance" data-crumb="Document Types"><i class="bi bi-dot"></i> Document Types</a>
+                    <a data-page="maintenance" data-title="Maintenance" data-crumb="Offices / Agencies"><i class="bi bi-dot"></i> Offices / Agencies</a>
+                    <a data-page="maintenance" data-title="Maintenance" data-crumb="Cabinets"><i class="bi bi-dot"></i> Cabinets</a>
+                    <a data-page="maintenance" data-title="Maintenance" data-crumb="Shelves / Drawers"><i class="bi bi-dot"></i> Shelves / Drawers</a>
+                    <a data-page="maintenance" data-title="Maintenance" data-crumb="Folders"><i class="bi bi-dot"></i> Folders</a>
+                    <a data-page="maintenance" data-title="Maintenance" data-crumb="Archive Boxes"><i class="bi bi-dot"></i> Archive Boxes</a>
+                    <a data-page="maintenance" data-title="Maintenance" data-crumb="Users"><i class="bi bi-dot"></i> Users</a>
+                    <a data-page="maintenance" data-title="Maintenance" data-crumb="Roles"><i class="bi bi-dot"></i> Roles</a>
                 </div>
             </li>
 
             <!-- ACCOUNT -->
-            <li>
-                <div class="nav-parent" data-target="menu-account">
-                    <i class="bi bi-person-circle"></i> Account <i class="bi bi-chevron-right chevron"></i>
-                </div>
-                <div class="sub-menu" id="menu-account">
-                    <a href="#account"><i class="bi bi-dot"></i> My Profile</a>
-                    <a href="#account"><i class="bi bi-dot"></i> Change Password</a>
-                    <a href="#account"><i class="bi bi-dot"></i> Logout</a>
-                </div>
-            </li>
+<li>
+    <div class="nav-parent" data-target="menu-account">
+        <i class="bi bi-person-circle"></i> Account <i class="bi bi-chevron-right chevron"></i>
+    </div>
+    <div class="sub-menu" id="menu-account">
+        <a data-page="account" data-title="Account" data-crumb="My Profile">
+            <i class="bi bi-dot"></i> My Profile
+        </a>
 
-            <!-- ABOUT / CONTACT (kept from original) -->
+        <a href="{{ path('app_register') }}" class="sub-menu-link">
+    <i class="bi bi-dot"></i> Register
+</a>
+
+        <a data-page="account" data-title="Account" data-crumb="Change Password">
+            <i class="bi bi-dot"></i> Change Password
+        </a>
+
+        <a data-page="account" data-title="Account" data-crumb="Logout">
+            <i class="bi bi-dot"></i> Logout
+        </a>
+    </div>
+</li>
+
+            <!-- ABOUT / CONTACT -->
             <li class="nav-item">
-                <a href="#about" class="nav-link" data-section="about">
+                <a class="nav-link" data-page="about" data-title="About" data-crumb="Who we are">
                     <i class="bi bi-info-circle-fill"></i> About
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#contact" class="nav-link" data-section="contact">
+                <a class="nav-link" data-page="contact" data-title="Contact" data-crumb="Get in touch">
                     <i class="bi bi-envelope-fill"></i> Contact
                 </a>
             </li>
@@ -941,503 +926,516 @@ footer a:hover{ color:var(--gold-soft); padding-left:3px; }
 
 </div>
 
-<div class="main" id="top">
-
-<section class="hero">
-<div class="container-fluid px-5">
-<div class="row align-items-center">
-
-<div class="col-lg-6">
-
-<div class="eyebrow"><span class="dot"></span> System Online</div>
-
-<h1>
-Manage University Documents<br>
-<span class="accent">Securely & Efficiently</span>
-</h1>
-
-<p>
-PresOffice is the official document management platform of the NORSU
-President's Office — helping the university store, organize, search,
-and track files with speed and accountability.
-</p>
-
-<div>
-<a href="#dashboard" class="btn btn-primary me-2">
-View Dashboard <i class="bi bi-arrow-right ms-1"></i>
-</a>
-<a href="#about" class="btn btn-outline-primary">
-Learn More
-</a>
-</div>
-
-<div class="hero-stats">
-    <div class="stat"><h3>100%</h3><span>Digital Records</span></div>
-    <div class="stat"><h3>24/7</h3><span>Document Tracking</span></div>
-    <div class="stat"><h3>Secure</h3><span>Role-Based Access</span></div>
-</div>
-
-</div>
-
-<div class="col-lg-6 text-center">
-<div class="hero-visual">
-<div class="card-float f1">
-    <i class="bi bi-shield-check text-primary"></i>
-    <div><small>Status</small><strong>Secured</strong></div>
-</div>
-<div class="card-float f2">
-    <i class="bi bi-check-circle-fill text-success"></i>
-    <div><small>Document</small><strong>Approved</strong></div>
-</div>
-<div class="hero-img-wrap">
-<img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900" alt="Document Management">
-</div>
-</div>
-</div>
-
-</div>
-</div>
-</section>
+<div class="main">
 
 <!-- ==========================
-     HOME DASHBOARD
+     PAGE: HOME (hero + dashboard)
 ========================== -->
+<div class="app-page active" id="page-home">
 
-<section id="dashboard">
+    <section class="hero">
     <div class="container-fluid px-5">
 
-        <div class="text-center mb-5 reveal">
-            <span class="section-tag">Overview</span>
-            <h2>Dashboard <span class="dash-badge"><i class="bi bi-hourglass-split"></i> Sample Data</span></h2>
-            <p class="text-muted mt-2">A snapshot of document activity across the Office. Figures below are placeholder data for layout purposes only.</p>
+        <div class="eyebrow"><span class="dot"></span> System Online</div>
+
+        <h1>
+        Manage University Documents<br>
+        <span class="accent">Securely & Efficiently</span>
+        </h1>
+
+        <p>
+        PresOffice is the official document management platform of the NORSU
+        President's Office — helping the university store, organize, search,
+        and track files with speed and accountability.
+        </p>
+
+        <div class="hero-stats">
+            <div class="stat"><h3>100%</h3><span>Digital Records</span></div>
+            <div class="stat"><h3>24/7</h3><span>Document Tracking</span></div>
+            <div class="stat"><h3>Secure</h3><span>Role-Based Access</span></div>
         </div>
 
-        <div class="row g-4 mb-4 reveal">
-            <div class="col-12">
-                <div class="dash-card">
-                    <h5>Quick Actions</h5>
-                    <div class="dash-sub">Jump straight to common tasks</div>
-                    <div class="quick-actions">
-                        <a href="#indexing"><i class="bi bi-file-earmark-plus-fill"></i> New Index</a>
-                        <a href="#records"><i class="bi bi-search"></i> Search Records</a>
-                        <a href="#filing"><i class="bi bi-geo-alt-fill"></i> View Filing Locations</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row g-4">
-
-            <div class="col-lg-5 reveal">
-                <div class="dash-card">
-                    <h5>Documents by Status</h5>
-                    <div class="dash-sub">Distribution of all logged documents this month</div>
-                    <div class="chart-wrap">
-                        <canvas id="statusPieChart"></canvas>
-                    </div>
-                    <div class="chart-legend">
-                        <div class="item"><span class="dot" style="background:#2563EB"></span> Received</div>
-                        <div class="item"><span class="dot" style="background:#D4A017"></span> Pending</div>
-                        <div class="item"><span class="dot" style="background:#22C55E"></span> Approved</div>
-                        <div class="item"><span class="dot" style="background:#8B5CF6"></span> Forwarded</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-7 reveal">
-                <div class="dash-card">
-
-                    <h5>This Week at a Glance</h5>
-                    <div class="dash-sub">Quick totals across all document types</div>
-
-                    <div class="stat-mini-row mb-4">
-                        <div class="stat-mini">
-                            <div class="num"><i class="bi bi-inbox-fill text-primary"></i> 128</div>
-                            <div class="lbl">Received</div>
-                        </div>
-                        <div class="stat-mini">
-                            <div class="num"><i class="bi bi-hourglass-split text-warning"></i> 34</div>
-                            <div class="lbl">Pending</div>
-                        </div>
-                        <div class="stat-mini">
-                            <div class="num"><i class="bi bi-check-circle-fill text-success"></i> 81</div>
-                            <div class="lbl">Approved</div>
-                        </div>
-                        <div class="stat-mini">
-                            <div class="num"><i class="bi bi-send-fill" style="color:#8B5CF6"></i> 13</div>
-                            <div class="lbl">Forwarded</div>
-                        </div>
-                    </div>
-
-                    <h5 class="mt-4">Recently Indexed Documents</h5>
-                    <div class="dash-sub">Latest entries in the tracking log</div>
-
-                    <div class="table-wrap">
-                        <table class="log-table">
-                            <thead>
-                                <tr><th>Tracking No.</th><th>Document</th><th>Department</th><th>Status</th><th>Date</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>2026-07-0142</td><td>Memorandum — Faculty Meeting</td><td>Academic Affairs</td>
-                                    <td><span class="status-pill approved"><i class="bi bi-check-circle-fill"></i> Approved</span></td>
-                                    <td>Jul 26, 2026</td>
-                                </tr>
-                                <tr>
-                                    <td>2026-07-0141</td><td>Travel Order — Conference</td><td>Finance Office</td>
-                                    <td><span class="status-pill pending"><i class="bi bi-hourglass-split"></i> Pending</span></td>
-                                    <td>Jul 25, 2026</td>
-                                </tr>
-                                <tr>
-                                    <td>2026-07-0140</td><td>MOA — Partner University</td><td>External Affairs</td>
-                                    <td><span class="status-pill forwarded"><i class="bi bi-send-fill"></i> Forwarded</span></td>
-                                    <td>Jul 24, 2026</td>
-                                </tr>
-                                <tr>
-                                    <td>2026-07-0139</td><td>Requisition — Office Supplies</td><td>Admin Services</td>
-                                    <td><span class="status-pill received"><i class="bi bi-inbox-fill"></i> Received</span></td>
-                                    <td>Jul 24, 2026</td>
-                                </tr>
-                                <tr>
-                                    <td>2026-07-0138</td><td>Resolution — Board Approval</td><td>President's Office</td>
-                                    <td><span class="status-pill approved"><i class="bi bi-check-circle-fill"></i> Approved</span></td>
-                                    <td>Jul 23, 2026</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="placeholder-note">
-                        <i class="bi bi-info-circle-fill"></i>
-                        <span>This dashboard currently shows sample data. It will be connected to live records once the data source and fields are finalized.</span>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
     </div>
-</section>
+    </section>
 
-<!-- ==========================
-     ACTIVITY LOGS / AUDIT TRAIL
-========================== -->
-<section id="activity-logs" class="placeholder-section">
-    <div class="container-fluid px-5">
+    <section class="page-section" id="dashboard">
+        <div class="container-fluid px-5">
 
-        <div class="text-center mb-5 reveal">
-            <span class="section-tag">Audit Trail</span>
-            <h2>Activity Logs <span class="dash-badge"><i class="bi bi-hourglass-split"></i> Sample Data</span></h2>
-            <p class="text-muted mt-2">
-                A complete record of user and system actions — logins, edits, approvals, and transfers —
-                for accountability and traceability.
-            </p>
-        </div>
+            <div class="mb-4">
+                <span class="section-tag">Overview</span>
+                <h2>Dashboard <span class="dash-badge"><i class="bi bi-hourglass-split"></i> Sample Data</span></h2>
+                <p class="text-muted mt-2 mb-0">A snapshot of document activity across the Office. Figures below are placeholder data for layout purposes only.</p>
+            </div>
 
-        <div class="row g-4">
-
-            <div class="col-lg-4 reveal">
-                <div class="dash-card">
-                    <h5>Log Summary</h5>
-                    <div class="dash-sub">Actions recorded today</div>
-                    <div class="stat-mini-row" style="flex-direction:column;">
-                        <div class="stat-mini">
-                            <div class="num"><i class="bi bi-box-arrow-in-right text-primary"></i> 22</div>
-                            <div class="lbl">Logins</div>
-                        </div>
-                        <div class="stat-mini">
-                            <div class="num"><i class="bi bi-pencil-fill text-warning"></i> 47</div>
-                            <div class="lbl">Records Edited</div>
-                        </div>
-                        <div class="stat-mini">
-                            <div class="num"><i class="bi bi-check-circle-fill text-success"></i> 19</div>
-                            <div class="lbl">Approvals</div>
-                        </div>
-                        <div class="stat-mini">
-                            <div class="num"><i class="bi bi-arrow-left-right" style="color:#8B5CF6"></i> 8</div>
-                            <div class="lbl">Transfers</div>
+            <div class="row g-4 mb-4">
+                <div class="col-12">
+                    <div class="dash-card">
+                        <h5>Quick Actions</h5>
+                        <div class="dash-sub">Jump straight to common tasks</div>
+                        <div class="quick-actions">
+                            <a data-page="indexing" data-title="Indexing" data-crumb="New Index"><i class="bi bi-file-earmark-plus-fill"></i> New Index</a>
+                            <a data-page="records" data-title="Indexed Records" data-crumb="View All Records"><i class="bi bi-search"></i> Search Records</a>
+                            <a data-page="filing" data-title="Filing" data-crumb="Cabinets"><i class="bi bi-geo-alt-fill"></i> View Filing Locations</a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-8 reveal">
-                <div class="dash-card">
+            <div class="row g-4">
 
-                    <h5>Full Audit Log</h5>
-                    <div class="dash-sub">Who did what, and when — most recent first</div>
-
-                    <div class="table-wrap">
-                        <table class="log-table">
-                            <thead>
-                                <tr><th>Timestamp</th><th>User</th><th>Action</th><th>Target</th><th>Details</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Jul 28, 2026 9:42 AM</td>
-                                    <td>J. Santos</td>
-                                    <td><span class="status-pill approved"><i class="bi bi-check-circle-fill"></i> Approved</span></td>
-                                    <td>2026-07-0142</td>
-                                    <td>Memorandum — Faculty Meeting</td>
-                                </tr>
-                                <tr>
-                                    <td>Jul 28, 2026 9:15 AM</td>
-                                    <td>M. Cruz</td>
-                                    <td><span class="status-pill received"><i class="bi bi-box-arrow-in-right"></i> Login</span></td>
-                                    <td>&mdash;</td>
-                                    <td>Signed in from Office PC 2</td>
-                                </tr>
-                                <tr>
-                                    <td>Jul 27, 2026 4:53 PM</td>
-                                    <td>A. Reyes</td>
-                                    <td><span class="status-pill pending"><i class="bi bi-pencil-fill"></i> Edited</span></td>
-                                    <td>2026-07-0139</td>
-                                    <td>Updated department field</td>
-                                </tr>
-                                <tr>
-                                    <td>Jul 27, 2026 2:10 PM</td>
-                                    <td>J. Santos</td>
-                                    <td><span class="status-pill forwarded"><i class="bi bi-send-fill"></i> Forwarded</span></td>
-                                    <td>2026-07-0140</td>
-                                    <td>Sent to External Affairs</td>
-                                </tr>
-                                <tr>
-                                    <td>Jul 27, 2026 10:05 AM</td>
-                                    <td>System</td>
-                                    <td><span class="status-pill" style="background:rgba(239,68,68,.12); color:#EF4444;"><i class="bi bi-shield-lock-fill"></i> Access Denied</span></td>
-                                    <td>&mdash;</td>
-                                    <td>Failed login attempt (3x)</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div class="col-lg-5">
+                    <div class="dash-card">
+                        <h5>Documents by Status</h5>
+                        <div class="dash-sub">Distribution of all logged documents this month</div>
+                        <div class="chart-wrap">
+                            <canvas id="statusPieChart"></canvas>
+                        </div>
+                        <div class="chart-legend">
+                            <div class="item"><span class="dot" style="background:#2563EB"></span> Received</div>
+                            <div class="item"><span class="dot" style="background:#D4A017"></span> Pending</div>
+                            <div class="item"><span class="dot" style="background:#22C55E"></span> Approved</div>
+                            <div class="item"><span class="dot" style="background:#8B5CF6"></span> Forwarded</div>
+                        </div>
                     </div>
-
-                    <div class="placeholder-note">
-                        <i class="bi bi-info-circle-fill"></i>
-                        <span>This audit trail currently shows sample data. Once live, it will log every user login, edit, approval, and transfer with full timestamps for accountability.</span>
-                    </div>
-
                 </div>
+
+                <div class="col-lg-7">
+                    <div class="dash-card">
+
+                        <h5>This Week at a Glance</h5>
+                        <div class="dash-sub">Quick totals across all document types</div>
+
+                        <div class="stat-mini-row mb-4">
+                            <div class="stat-mini">
+                                <div class="num"><i class="bi bi-inbox-fill text-primary"></i> 128</div>
+                                <div class="lbl">Received</div>
+                            </div>
+                            <div class="stat-mini">
+                                <div class="num"><i class="bi bi-hourglass-split text-warning"></i> 34</div>
+                                <div class="lbl">Pending</div>
+                            </div>
+                            <div class="stat-mini">
+                                <div class="num"><i class="bi bi-check-circle-fill text-success"></i> 81</div>
+                                <div class="lbl">Approved</div>
+                            </div>
+                            <div class="stat-mini">
+                                <div class="num"><i class="bi bi-send-fill" style="color:#8B5CF6"></i> 13</div>
+                                <div class="lbl">Forwarded</div>
+                            </div>
+                        </div>
+
+                        <h5 class="mt-4">Recently Indexed Documents</h5>
+                        <div class="dash-sub">Latest entries in the tracking log</div>
+
+                        <div class="table-wrap">
+                            <table class="log-table">
+                                <thead>
+                                    <tr><th>Tracking No.</th><th>Document</th><th>Department</th><th>Status</th><th>Date</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>2026-07-0142</td><td>Memorandum — Faculty Meeting</td><td>Academic Affairs</td>
+                                        <td><span class="status-pill approved"><i class="bi bi-check-circle-fill"></i> Approved</span></td>
+                                        <td>Jul 26, 2026</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2026-07-0141</td><td>Travel Order — Conference</td><td>Finance Office</td>
+                                        <td><span class="status-pill pending"><i class="bi bi-hourglass-split"></i> Pending</span></td>
+                                        <td>Jul 25, 2026</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2026-07-0140</td><td>MOA — Partner University</td><td>External Affairs</td>
+                                        <td><span class="status-pill forwarded"><i class="bi bi-send-fill"></i> Forwarded</span></td>
+                                        <td>Jul 24, 2026</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2026-07-0139</td><td>Requisition — Office Supplies</td><td>Admin Services</td>
+                                        <td><span class="status-pill received"><i class="bi bi-inbox-fill"></i> Received</span></td>
+                                        <td>Jul 24, 2026</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2026-07-0138</td><td>Resolution — Board Approval</td><td>President's Office</td>
+                                        <td><span class="status-pill approved"><i class="bi bi-check-circle-fill"></i> Approved</span></td>
+                                        <td>Jul 23, 2026</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="placeholder-note">
+                            <i class="bi bi-info-circle-fill"></i>
+                            <span>This dashboard currently shows sample data. It will be connected to live records once the data source and fields are finalized.</span>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
+        </div>
+    </section>
 
-        </div>
-    </div>
-</section>
-
-<!-- ==========================
-     INDEXING (placeholder)
-========================== -->
-<section id="indexing" class="placeholder-section">
-    <div class="container-fluid px-5">
-        <span class="section-tag">Indexing</span>
-        <h2 class="mb-4">Indexing</h2>
-        <div class="sub-page-grid">
-            <div class="sub-page-card"><i class="bi bi-file-earmark-plus-fill"></i><h5>New Index</h5><span>Log a new incoming document</span></div>
-            <div class="sub-page-card"><i class="bi bi-list-check"></i><h5>Indexed Records</h5><span>View documents already indexed</span></div>
-            <div class="sub-page-card"><i class="bi bi-search"></i><h5>Search Document</h5><span>Find a document by keyword or number</span></div>
-        </div>
-        <div class="placeholder-card mt-4">
-            <i class="bi bi-cone-striped"></i>
-            <h4>Page under construction</h4>
-            <p>This section will contain the indexing workflow once finalized.</p>
-        </div>
-    </div>
-</section>
+</div>
 
 <!-- ==========================
-     INDEXED RECORDS (placeholder)
+     PAGE: ACTIVITY LOGS
 ========================== -->
-<section id="records" class="placeholder-section">
-    <div class="container-fluid px-5">
-        <span class="section-tag">Indexed Records</span>
-        <h2 class="mb-4">Indexed Records</h2>
-        <div class="sub-page-grid">
-            <div class="sub-page-card"><i class="bi bi-folder2-open"></i><h5>View All Records</h5><span>Browse the full archive</span></div>
-            <div class="sub-page-card"><i class="bi bi-sliders"></i><h5>Advanced Search</h5><span>Filter by category, date, office</span></div>
-            <div class="sub-page-card"><i class="bi bi-file-earmark-text-fill"></i><h5>Record Details</h5><span>View a single record's full history</span></div>
-            <div class="sub-page-card"><i class="bi bi-clock-history"></i><h5>Borrowing History</h5><span>Track who has borrowed physical files</span></div>
-        </div>
-        <div class="placeholder-card mt-4">
-            <i class="bi bi-cone-striped"></i>
-            <h4>Page under construction</h4>
-            <p>This section will contain record browsing and search once finalized.</p>
-        </div>
-    </div>
-</section>
+<div class="app-page" id="page-activity-logs">
+    <section class="page-section">
+        <div class="container-fluid px-5">
 
-<!-- ==========================
-     FILING (placeholder)
-========================== -->
-<section id="filing" class="placeholder-section">
-    <div class="container-fluid px-5">
-        <span class="section-tag">Filing</span>
-        <h2 class="mb-4">Filing</h2>
-        <div class="sub-page-grid">
-            <div class="sub-page-card"><i class="bi bi-archive-fill"></i><h5>Cabinets</h5><span>Physical cabinet locations</span></div>
-            <div class="sub-page-card"><i class="bi bi-layers-fill"></i><h5>Shelves / Drawers</h5><span>Storage within each cabinet</span></div>
-            <div class="sub-page-card"><i class="bi bi-folder-fill"></i><h5>Folders</h5><span>Grouped documents by subject/year</span></div>
-            <div class="sub-page-card"><i class="bi bi-box-seam-fill"></i><h5>Archive Boxes</h5><span>Long-term storage boxes</span></div>
-            <div class="sub-page-card"><i class="bi bi-arrow-left-right"></i><h5>Transfer History</h5><span>Movement of files between locations</span></div>
-        </div>
-        <div class="placeholder-card mt-4">
-            <i class="bi bi-cone-striped"></i>
-            <h4>Page under construction</h4>
-            <p>This section will map physical storage locations once finalized.</p>
-        </div>
-    </div>
-</section>
-
-<!-- ==========================
-     REPORTS (placeholder)
-========================== -->
-<section id="reports" class="placeholder-section">
-    <div class="container-fluid px-5">
-        <span class="section-tag">Reports</span>
-        <h2 class="mb-4">Reports</h2>
-        <div class="sub-page-grid">
-            <div class="sub-page-card"><i class="bi bi-calendar3"></i><h5>Monthly Indexed Records</h5><span>Documents indexed per month</span></div>
-            <div class="sub-page-card"><i class="bi bi-tags-fill"></i><h5>Category Report</h5><span>Breakdown by document category</span></div>
-            <div class="sub-page-card"><i class="bi bi-hdd-stack-fill"></i><h5>Storage Utilization</h5><span>Cabinet/shelf/box capacity usage</span></div>
-            <div class="sub-page-card"><i class="bi bi-arrow-left-right"></i><h5>Transfer Report</h5><span>History of file movements</span></div>
-        </div>
-        <div class="placeholder-card mt-4">
-            <i class="bi bi-cone-striped"></i>
-            <h4>Page under construction</h4>
-            <p>Reporting views will be built once data sources are finalized.</p>
-        </div>
-    </div>
-</section>
-
-<!-- ==========================
-     MAINTENANCE (placeholder)
-========================== -->
-<section id="maintenance" class="placeholder-section">
-    <div class="container-fluid px-5">
-        <span class="section-tag">Maintenance</span>
-        <h2 class="mb-4">Maintenance</h2>
-        <div class="sub-page-grid">
-            <div class="sub-page-card"><i class="bi bi-tags-fill"></i><h5>Categories</h5><span>Manage document categories</span></div>
-            <div class="sub-page-card"><i class="bi bi-file-earmark-ruled-fill"></i><h5>Document Types</h5><span>Memo, Letter, Resolution, etc.</span></div>
-            <div class="sub-page-card"><i class="bi bi-building"></i><h5>Offices / Agencies</h5><span>Originating offices and agencies</span></div>
-            <div class="sub-page-card"><i class="bi bi-archive-fill"></i><h5>Cabinets</h5><span>Manage cabinet records</span></div>
-            <div class="sub-page-card"><i class="bi bi-layers-fill"></i><h5>Shelves / Drawers</h5><span>Manage shelf/drawer records</span></div>
-            <div class="sub-page-card"><i class="bi bi-folder-fill"></i><h5>Folders</h5><span>Create, close, or transfer folders</span></div>
-            <div class="sub-page-card"><i class="bi bi-box-seam-fill"></i><h5>Archive Boxes</h5><span>Manage archive box records</span></div>
-            <div class="sub-page-card"><i class="bi bi-people-fill"></i><h5>Users</h5><span>Admin, Staff, Intern accounts</span></div>
-            <div class="sub-page-card"><i class="bi bi-shield-lock-fill"></i><h5>Roles</h5><span>Optional role/permission sets</span></div>
-        </div>
-        <div class="placeholder-card mt-4">
-            <i class="bi bi-cone-striped"></i>
-            <h4>Page under construction</h4>
-            <p>All CRUD management pages will live here once finalized.</p>
-        </div>
-    </div>
-</section>
-
-<!-- ==========================
-     ACCOUNT (placeholder)
-========================== -->
-<section id="account" class="placeholder-section">
-    <div class="container-fluid px-5">
-        <span class="section-tag">Account</span>
-        <h2 class="mb-4">Account</h2>
-        <div class="sub-page-grid">
-            <div class="sub-page-card"><i class="bi bi-person-fill"></i><h5>My Profile</h5><span>View and edit your account info</span></div>
-            <div class="sub-page-card"><i class="bi bi-key-fill"></i><h5>Change Password</h5><span>Update your login credentials</span></div>
-            <div class="sub-page-card"><i class="bi bi-box-arrow-right"></i><h5>Logout</h5><span>Sign out of PresOffice</span></div>
-        </div>
-        <div class="placeholder-card mt-4">
-            <i class="bi bi-cone-striped"></i>
-            <h4>Page under construction</h4>
-            <p>Account management will be added once authentication is implemented.</p>
-        </div>
-    </div>
-</section>
-
-<!-- ==========================
-     ABOUT
-========================== -->
-
-<section id="about">
-    <div class="container-fluid px-5">
-        <div class="row align-items-center g-5">
-
-            <div class="col-lg-6 reveal">
-                <span class="section-tag">Who We Are</span>
-                <h2 class="mb-4">About PresOffice</h2>
-                <p>
-                    PresOffice is the official document management platform developed
-                    for the Negros Oriental State University President's Office. It
-                    centralizes document storage, improves collaboration, and
-                    simplifies file retrieval across the university.
+            <div class="mb-4">
+                <span class="section-tag">Audit Trail</span>
+                <h2>Activity Logs <span class="dash-badge"><i class="bi bi-hourglass-split"></i> Sample Data</span></h2>
+                <p class="text-muted mt-2 mb-0">
+                    A complete record of user and system actions — logins, edits, approvals, and transfers —
+                    for accountability and traceability.
                 </p>
-                <p>
-                    Built for the Office's daily operations, PresOffice enhances
-                    productivity through role-based permissions, secure file storage,
-                    document versioning, and comprehensive activity monitoring.
-                </p>
-                <ul class="about-checklist">
-                    <li><i class="bi bi-check-circle-fill"></i> Centralized, searchable document archive</li>
-                    <li><i class="bi bi-check-circle-fill"></i> Full audit trail for every file action</li>
-                    <li><i class="bi bi-check-circle-fill"></i> Encrypted storage & role-based access</li>
-                </ul>
             </div>
 
-            <div class="col-lg-6 about-visual reveal">
-                <div class="about-seal"><i class="bi bi-folder-check"></i></div>
-            </div>
+            <div class="row g-4">
 
+                <div class="col-lg-4">
+                    <div class="dash-card">
+                        <h5>Log Summary</h5>
+                        <div class="dash-sub">Actions recorded today</div>
+                        <div class="stat-mini-row" style="flex-direction:column;">
+                            <div class="stat-mini">
+                                <div class="num"><i class="bi bi-box-arrow-in-right text-primary"></i> 22</div>
+                                <div class="lbl">Logins</div>
+                            </div>
+                            <div class="stat-mini">
+                                <div class="num"><i class="bi bi-pencil-fill text-warning"></i> 47</div>
+                                <div class="lbl">Records Edited</div>
+                            </div>
+                            <div class="stat-mini">
+                                <div class="num"><i class="bi bi-check-circle-fill text-success"></i> 19</div>
+                                <div class="lbl">Approvals</div>
+                            </div>
+                            <div class="stat-mini">
+                                <div class="num"><i class="bi bi-arrow-left-right" style="color:#8B5CF6"></i> 8</div>
+                                <div class="lbl">Transfers</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="dash-card">
+
+                        <h5>Full Audit Log</h5>
+                        <div class="dash-sub">Who did what, and when — most recent first</div>
+
+                        <div class="table-wrap">
+                            <table class="log-table">
+                                <thead>
+                                    <tr><th>Timestamp</th><th>User</th><th>Action</th><th>Target</th><th>Details</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Jul 28, 2026 9:42 AM</td>
+                                        <td>J. Santos</td>
+                                        <td><span class="status-pill approved"><i class="bi bi-check-circle-fill"></i> Approved</span></td>
+                                        <td>2026-07-0142</td>
+                                        <td>Memorandum — Faculty Meeting</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jul 28, 2026 9:15 AM</td>
+                                        <td>M. Cruz</td>
+                                        <td><span class="status-pill received"><i class="bi bi-box-arrow-in-right"></i> Login</span></td>
+                                        <td>&mdash;</td>
+                                        <td>Signed in from Office PC 2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jul 27, 2026 4:53 PM</td>
+                                        <td>A. Reyes</td>
+                                        <td><span class="status-pill pending"><i class="bi bi-pencil-fill"></i> Edited</span></td>
+                                        <td>2026-07-0139</td>
+                                        <td>Updated department field</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jul 27, 2026 2:10 PM</td>
+                                        <td>J. Santos</td>
+                                        <td><span class="status-pill forwarded"><i class="bi bi-send-fill"></i> Forwarded</span></td>
+                                        <td>2026-07-0140</td>
+                                        <td>Sent to External Affairs</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jul 27, 2026 10:05 AM</td>
+                                        <td>System</td>
+                                        <td><span class="status-pill" style="background:rgba(239,68,68,.12); color:#EF4444;"><i class="bi bi-shield-lock-fill"></i> Access Denied</span></td>
+                                        <td>&mdash;</td>
+                                        <td>Failed login attempt (3x)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="placeholder-note">
+                            <i class="bi bi-info-circle-fill"></i>
+                            <span>This audit trail currently shows sample data. Once live, it will log every user login, edit, approval, and transfer with full timestamps for accountability.</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 
 <!-- ==========================
-     FOOTER
+     PAGE: INDEXING (placeholder)
 ========================== -->
+<div class="app-page" id="page-indexing">
+    <section class="page-section">
+        <div class="container-fluid px-5">
+            <span class="section-tag">Indexing</span>
+            <h2 class="mb-4">Indexing</h2>
+          <div class="sub-page-grid">
 
-<footer id="contact" class="py-5">
-    <div class="container-fluid px-5">
-        <div class="row g-4">
+    <div class="sub-page-card">
+        <i class="bi bi-person-fill"></i>
+        <h5>My Profile</h5>
+        <span>View and edit your account information.</span>
+    </div>
 
-            <div class="col-md-4">
-                <h3>PresOffice</h3>
-                <p>Official document management system of the NORSU President's Office.</p>
-                <div class="footer-social mt-3">
-                    <a href="#"><i class="bi bi-facebook"></i></a>
-                    <a href="#"><i class="bi bi-globe"></i></a>
-                    <a href="#"><i class="bi bi-envelope-fill"></i></a>
+    <div class="sub-page-card">
+        <i class="bi bi-person-plus-fill"></i>
+        <h5>Register User</h5>
+        <span>Create a new user account for the system.</span>
+    </div>
+
+    <div class="sub-page-card">
+        <i class="bi bi-key-fill"></i>
+        <h5>Change Password</h5>
+        <span>Update your login credentials.</span>
+    </div>
+
+    <div class="sub-page-card">
+        <i class="bi bi-box-arrow-right"></i>
+        <h5>Logout</h5>
+        <span>Sign out of PresOffice.</span>
+    </div>
+
+</div>
+            <div class="placeholder-card mt-4">
+                <i class="bi bi-cone-striped"></i>
+                <h4>Page under construction</h4>
+                <p>This section will contain the indexing workflow once finalized.</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ==========================
+     PAGE: INDEXED RECORDS (placeholder)
+========================== -->
+<div class="app-page" id="page-records">
+    <section class="page-section">
+        <div class="container-fluid px-5">
+            <span class="section-tag">Indexed Records</span>
+            <h2 class="mb-4">Indexed Records</h2>
+            <div class="sub-page-grid">
+                <div class="sub-page-card"><i class="bi bi-folder2-open"></i><h5>View All Records</h5><span>Browse the full archive</span></div>
+                <div class="sub-page-card"><i class="bi bi-sliders"></i><h5>Advanced Search</h5><span>Filter by category, date, office</span></div>
+                <div class="sub-page-card"><i class="bi bi-file-earmark-text-fill"></i><h5>Record Details</h5><span>View a single record's full history</span></div>
+                <div class="sub-page-card"><i class="bi bi-clock-history"></i><h5>Borrowing History</h5><span>Track who has borrowed physical files</span></div>
+            </div>
+            <div class="placeholder-card mt-4">
+                <i class="bi bi-cone-striped"></i>
+                <h4>Page under construction</h4>
+                <p>This section will contain record browsing and search once finalized.</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ==========================
+     PAGE: FILING (placeholder)
+========================== -->
+<div class="app-page" id="page-filing">
+    <section class="page-section">
+        <div class="container-fluid px-5">
+            <span class="section-tag">Filing</span>
+            <h2 class="mb-4">Filing</h2>
+            <div class="sub-page-grid">
+                <div class="sub-page-card"><i class="bi bi-archive-fill"></i><h5>Cabinets</h5><span>Physical cabinet locations</span></div>
+                <div class="sub-page-card"><i class="bi bi-layers-fill"></i><h5>Shelves / Drawers</h5><span>Storage within each cabinet</span></div>
+                <div class="sub-page-card"><i class="bi bi-folder-fill"></i><h5>Folders</h5><span>Grouped documents by subject/year</span></div>
+                <div class="sub-page-card"><i class="bi bi-box-seam-fill"></i><h5>Archive Boxes</h5><span>Long-term storage boxes</span></div>
+                <div class="sub-page-card"><i class="bi bi-arrow-left-right"></i><h5>Transfer History</h5><span>Movement of files between locations</span></div>
+            </div>
+            <div class="placeholder-card mt-4">
+                <i class="bi bi-cone-striped"></i>
+                <h4>Page under construction</h4>
+                <p>This section will map physical storage locations once finalized.</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ==========================
+     PAGE: REPORTS (placeholder)
+========================== -->
+<div class="app-page" id="page-reports">
+    <section class="page-section">
+        <div class="container-fluid px-5">
+            <span class="section-tag">Reports</span>
+            <h2 class="mb-4">Reports</h2>
+            <div class="sub-page-grid">
+                <div class="sub-page-card"><i class="bi bi-calendar3"></i><h5>Monthly Indexed Records</h5><span>Documents indexed per month</span></div>
+                <div class="sub-page-card"><i class="bi bi-tags-fill"></i><h5>Category Report</h5><span>Breakdown by document category</span></div>
+                <div class="sub-page-card"><i class="bi bi-hdd-stack-fill"></i><h5>Storage Utilization</h5><span>Cabinet/shelf/box capacity usage</span></div>
+                <div class="sub-page-card"><i class="bi bi-arrow-left-right"></i><h5>Transfer Report</h5><span>History of file movements</span></div>
+            </div>
+            <div class="placeholder-card mt-4">
+                <i class="bi bi-cone-striped"></i>
+                <h4>Page under construction</h4>
+                <p>Reporting views will be built once data sources are finalized.</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ==========================
+     PAGE: MAINTENANCE (placeholder)
+========================== -->
+<div class="app-page" id="page-maintenance">
+    <section class="page-section">
+        <div class="container-fluid px-5">
+            <span class="section-tag">Maintenance</span>
+            <h2 class="mb-4">Maintenance</h2>
+            <div class="sub-page-grid">
+                <div class="sub-page-card"><i class="bi bi-tags-fill"></i><h5>Categories</h5><span>Manage document categories</span></div>
+                <div class="sub-page-card"><i class="bi bi-file-earmark-ruled-fill"></i><h5>Document Types</h5><span>Memo, Letter, Resolution, etc.</span></div>
+                <div class="sub-page-card"><i class="bi bi-building"></i><h5>Offices / Agencies</h5><span>Originating offices and agencies</span></div>
+                <div class="sub-page-card"><i class="bi bi-archive-fill"></i><h5>Cabinets</h5><span>Manage cabinet records</span></div>
+                <div class="sub-page-card"><i class="bi bi-layers-fill"></i><h5>Shelves / Drawers</h5><span>Manage shelf/drawer records</span></div>
+                <div class="sub-page-card"><i class="bi bi-folder-fill"></i><h5>Folders</h5><span>Create, close, or transfer folders</span></div>
+                <div class="sub-page-card"><i class="bi bi-box-seam-fill"></i><h5>Archive Boxes</h5><span>Manage archive box records</span></div>
+                <div class="sub-page-card"><i class="bi bi-people-fill"></i><h5>Users</h5><span>Admin, Staff, Intern accounts</span></div>
+                <div class="sub-page-card"><i class="bi bi-shield-lock-fill"></i><h5>Roles</h5><span>Optional role/permission sets</span></div>
+            </div>
+            <div class="placeholder-card mt-4">
+                <i class="bi bi-cone-striped"></i>
+                <h4>Page under construction</h4>
+                <p>All CRUD management pages will live here once finalized.</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ==========================
+     PAGE: ACCOUNT (placeholder)
+========================== -->
+<div class="app-page" id="page-account">
+    <section class="page-section">
+        <div class="container-fluid px-5">
+            <span class="section-tag">Account</span>
+            <h2 class="mb-4">Account</h2>
+            <div class="sub-page-grid">
+                <div class="sub-page-card"><i class="bi bi-person-fill"></i><h5>My Profile</h5><span>View and edit your account info</span></div>
+                <div class="sub-page-card"><i class="bi bi-key-fill"></i><h5>Change Password</h5><span>Update your login credentials</span></div>
+                <div class="sub-page-card"><i class="bi bi-box-arrow-right"></i><h5>Logout</h5><span>Sign out of PresOffice</span></div>
+            </div>
+            <div class="placeholder-card mt-4">
+                <i class="bi bi-cone-striped"></i>
+                <h4>Page under construction</h4>
+                <p>Account management will be added once authentication is implemented.</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ==========================
+     PAGE: ABOUT
+========================== -->
+<div class="app-page" id="page-about">
+    <section class="page-section">
+        <div class="container-fluid px-5">
+            <div class="row align-items-center g-5">
+
+                <div class="col-lg-6">
+                    <span class="section-tag">Who We Are</span>
+                    <h2 class="mb-4">About PresOffice</h2>
+                    <p>
+                        PresOffice is the official document management platform developed
+                        for the Negros Oriental State University President's Office. It
+                        centralizes document storage, improves collaboration, and
+                        simplifies file retrieval across the university.
+                    </p>
+                    <p>
+                        Built for the Office's daily operations, PresOffice enhances
+                        productivity through role-based permissions, secure file storage,
+                        document versioning, and comprehensive activity monitoring.
+                    </p>
+                    <ul class="about-checklist">
+                        <li><i class="bi bi-check-circle-fill"></i> Centralized, searchable document archive</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Full audit trail for every file action</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Encrypted storage & role-based access</li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-6 about-visual">
+                    <div class="about-seal"><i class="bi bi-folder-check"></i></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ==========================
+     PAGE: CONTACT
+========================== -->
+<div class="app-page" id="page-contact">
+    <section class="page-section">
+        <div class="container-fluid px-5">
+            <span class="section-tag">Get In Touch</span>
+            <h2 class="mb-4">Contact</h2>
+
+            <div class="contact-card">
+                <div class="row g-4">
+
+                    <div class="col-md-4">
+                        <h3>PresOffice</h3>
+                        <p>Official document management system of the NORSU President's Office.</p>
+                        <div class="footer-social mt-3">
+                            <a href="#"><i class="bi bi-facebook"></i></a>
+                            <a href="#"><i class="bi bi-globe"></i></a>
+                            <a href="#"><i class="bi bi-envelope-fill"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Quick Links</h5>
+                        <p><a data-page="home" data-title="Home" data-crumb="Overview">Home</a></p>
+                        <p><a data-page="home" data-title="Home" data-crumb="Overview">Dashboard</a></p>
+                        <p><a data-page="activity-logs" data-title="Activity Logs" data-crumb="Audit trail">Activity Logs</a></p>
+                        <p><a data-page="about" data-title="About" data-crumb="Who we are">About</a></p>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Contact</h5>
+                        <p><i class="bi bi-envelope-fill"></i> support@presoffice.norsu.edu.ph</p>
+                        <p><i class="bi bi-telephone-fill"></i> (+63) 35 522-5050</p>
+                        <p><i class="bi bi-geo-alt-fill"></i> Kagawasan Avenue, Dumaguete City</p>
+                    </div>
+
+                </div>
+
+                <hr class="border-secondary my-4" style="opacity:.15">
+
+                <div class="text-center" style="font-size:13px; opacity:.8;">
+                    &copy; <span id="year2"></span> PresOffice &middot; Negros Oriental State University. All Rights Reserved.
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <h5>Quick Links</h5>
-                <p><a href="#top">Home</a></p>
-                <p><a href="#dashboard">Dashboard</a></p>
-                <p><a href="#activity-logs">Activity Logs</a></p>
-                <p><a href="#about">About</a></p>
-            </div>
-
-            <div class="col-md-4">
-                <h5>Contact</h5>
-                <p><i class="bi bi-envelope-fill"></i> support@presoffice.norsu.edu.ph</p>
-                <p><i class="bi bi-telephone-fill"></i> (+63) 35 522-5050</p>
-                <p><i class="bi bi-geo-alt-fill"></i> Kagawasan Avenue, Dumaguete City</p>
-            </div>
-
         </div>
-
-        <hr class="border-secondary my-4" style="opacity:.15">
-
-        <div class="text-center" style="font-size:13px; opacity:.8;">
-            &copy; <span id="year2"></span> PresOffice &middot; Negros Oriental State University. All Rights Reserved.
-        </div>
-
-    </div>
-</footer>
-
+    </section>
 </div>
 
-<div class="back-to-top" id="backToTop"><i class="bi bi-arrow-up"></i></div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script>
@@ -1482,21 +1480,15 @@ document.addEventListener('DOMContentLoaded', function(){
         sidebar.classList.remove('open');
         overlay.classList.remove('show');
     }
-    document.querySelectorAll('.sidebar a').forEach(function(a){
-        a.addEventListener('click', closeSidebar);
-    });
 
-    /* EXPANDABLE NAV PARENTS */
+    /* EXPANDABLE NAV PARENTS (accordion) */
     document.querySelectorAll('.nav-parent').forEach(function(parent){
         parent.addEventListener('click', function(){
             var subMenu = document.getElementById(parent.dataset.target);
             var isOpen = subMenu.classList.contains('open');
 
-            // close all other submenus (accordion behavior)
             document.querySelectorAll('.sub-menu.open').forEach(function(el){
-                if(el !== subMenu){
-                    el.classList.remove('open');
-                }
+                if(el !== subMenu) el.classList.remove('open');
             });
             document.querySelectorAll('.nav-parent.open').forEach(function(el){
                 if(el !== parent) el.classList.remove('open');
@@ -1507,41 +1499,54 @@ document.addEventListener('DOMContentLoaded', function(){
         });
     });
 
-    /* ACTIVE LINK ON SCROLL (top-level items only) */
-    var navLinks = document.querySelectorAll('.nav-item > .nav-link');
-    var sections = ['top','activity-logs','about','contact'].map(function(id){
-        return document.getElementById(id);
-    }).filter(Boolean);
+    /* ===== PAGE SWITCHING (locked single-view app shell) ===== */
+    var pages = document.querySelectorAll('.app-page');
+    var navLinks = document.querySelectorAll('[data-page]');
+    var titleEl = document.getElementById('pageTitleText');
+    var crumbEl = document.getElementById('pageCrumbText');
 
-    function onScroll(){
-        var pos = window.scrollY + 120;
-        var current = 'top';
-        sections.forEach(function(sec){
-            if(sec.offsetTop <= pos) current = sec.id;
+    function goToPage(pageId, title, crumb, sourceLink){
+        pages.forEach(function(p){
+            p.classList.toggle('active', p.id === 'page-' + pageId);
         });
-        navLinks.forEach(function(link){
-            link.classList.toggle('active', link.dataset.section === current);
-        });
-        document.getElementById('backToTop').classList.toggle('show', window.scrollY > 500);
-    }
-    window.addEventListener('scroll', onScroll);
-    onScroll();
-
-    document.getElementById('backToTop').addEventListener('click', function(){
-        window.scrollTo({top:0, behavior:'smooth'});
-    });
-
-    /* SCROLL REVEAL */
-    var revealEls = document.querySelectorAll('.reveal');
-    var io = new IntersectionObserver(function(entries){
-        entries.forEach(function(entry){
-            if(entry.isIntersecting){
-                entry.target.classList.add('in');
-                io.unobserve(entry.target);
+        if(pageId === 'home' || pageId === 'about' || pageId === 'contact' || pageId === 'activity-logs'){
+            document.querySelectorAll('.nav-item > .nav-link').forEach(function(l){
+                l.classList.toggle('active', l.dataset.page === pageId);
+            });
+            document.querySelectorAll('.sub-menu a').forEach(function(l){ l.classList.remove('active'); });
+        } else {
+            document.querySelectorAll('.nav-item > .nav-link').forEach(function(l){ l.classList.remove('active'); });
+            document.querySelectorAll('.sub-menu a').forEach(function(l){
+                l.classList.toggle('active', l === sourceLink);
+            });
+            // keep the relevant submenu expanded so the user sees where they are
+            if(sourceLink){
+                var subMenu = sourceLink.closest('.sub-menu');
+                if(subMenu){
+                    document.querySelectorAll('.sub-menu.open').forEach(function(el){
+                        if(el !== subMenu) el.classList.remove('open');
+                    });
+                    document.querySelectorAll('.nav-parent.open').forEach(function(el){ el.classList.remove('open'); });
+                    subMenu.classList.add('open');
+                    var parentToggle = document.querySelector('.nav-parent[data-target="' + subMenu.id + '"]');
+                    if(parentToggle) parentToggle.classList.add('open');
+                }
             }
+        }
+        titleEl.textContent = title || pageId;
+        crumbEl.textContent = crumb || '';
+        // reset scroll position of the freshly-opened page
+        var activePage = document.getElementById('page-' + pageId);
+        if(activePage) activePage.scrollTop = 0;
+        closeSidebar();
+    }
+
+    navLinks.forEach(function(link){
+        link.addEventListener('click', function(e){
+            e.preventDefault();
+            goToPage(link.dataset.page, link.dataset.title, link.dataset.crumb, link);
         });
-    }, { threshold:0.15 });
-    revealEls.forEach(function(el){ io.observe(el); });
+    });
 
     /* DASHBOARD PIE CHART */
     var pieCanvas = document.getElementById('statusPieChart');

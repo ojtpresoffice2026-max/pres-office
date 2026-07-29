@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DocumentFiling index{% endblock %}
+
+{% block body %}
+    <h1>DocumentFiling index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Document_no</th>
+                <th>Document_status</th>
+                <th>Filed_by</th>
+                <th>Indexed_by</th>
+                <th>Date_index</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for document_filing in document_filings %}
+            <tr>
+                <td>{{ document_filing.id }}</td>
+                <td>{{ document_filing.documentNo }}</td>
+                <td>{{ document_filing.documentStatus }}</td>
+                <td>{{ document_filing.filedBy }}</td>
+                <td>{{ document_filing.indexedBy }}</td>
+                <td>{{ document_filing.dateIndex ? document_filing.dateIndex|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_document_filing_show', {'id': document_filing.id}) }}">show</a>
+                    <a href="{{ path('app_document_filing_edit', {'id': document_filing.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_document_filing_new') }}">Create new</a>
+{% endblock %}

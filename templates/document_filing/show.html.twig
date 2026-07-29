@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DocumentFiling{% endblock %}
+
+{% block body %}
+    <h1>DocumentFiling</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ document_filing.id }}</td>
+            </tr>
+            <tr>
+                <th>Document_no</th>
+                <td>{{ document_filing.documentNo }}</td>
+            </tr>
+            <tr>
+                <th>Document_status</th>
+                <td>{{ document_filing.documentStatus }}</td>
+            </tr>
+            <tr>
+                <th>Filed_by</th>
+                <td>{{ document_filing.filedBy }}</td>
+            </tr>
+            <tr>
+                <th>Indexed_by</th>
+                <td>{{ document_filing.indexedBy }}</td>
+            </tr>
+            <tr>
+                <th>Date_index</th>
+                <td>{{ document_filing.dateIndex ? document_filing.dateIndex|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_document_filing_index') }}">back to list</a>
+
+    <a href="{{ path('app_document_filing_edit', {'id': document_filing.id}) }}">edit</a>
+
+    {{ include('document_filing/_delete_form.html.twig') }}
+{% endblock %}
