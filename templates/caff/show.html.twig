@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Caff{% endblock %}
+
+{% block body %}
+    <h1>Caff</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ caff.id }}</td>
+            </tr>
+            <tr>
+                <th>No of comm</th>
+                <td>{{ caff.noOfComm }}</td>
+            </tr>
+            <tr>
+                <th>Document code</th>
+                <td>{{ caff.documentCode }}</td>
+            </tr>
+            <tr>
+                <th>Bearer of letter</th>
+                <td>{{ caff.bearerOfLetter }}</td>
+            </tr>
+            <tr>
+                <th>Date receive</th>
+                <td>{{ caff.dateReceive ? caff.dateReceive|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Time receive</th>
+                <td>{{ caff.timeReceive }}</td>
+            </tr>
+            <tr>
+                <th>Receiving staff</th>
+                <td>{{ caff.receivingStaff }}</td>
+            </tr>
+            <tr>
+                <th>Letter sender</th>
+                <td>{{ caff.letterSender }}</td>
+            </tr>
+            <tr>
+                <th>Office designation</th>
+                <td>{{ caff.officeDesignation }}</td>
+            </tr>
+            <tr>
+                <th>Date of the letter</th>
+                <td>{{ caff.dateOfTheLetter ? caff.dateOfTheLetter|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Content of the letter</th>
+                <td>{{ caff.contentOfTheLetter }}</td>
+            </tr>
+            <tr>
+                <th>Other note</th>
+                <td>{{ caff.otherNote }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_caff_index') }}">back to list</a>
+
+    <a href="{{ path('app_caff_edit', {'id': caff.id}) }}">edit</a>
+
+    {{ include('caff/_delete_form.html.twig') }}
+{% endblock %}

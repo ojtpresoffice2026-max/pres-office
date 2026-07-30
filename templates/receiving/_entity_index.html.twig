@@ -1,0 +1,114 @@
+{% set tableId = table_id|default('entity-table') %}
+{% set createRoute = create_route|default('app_caff_new') %}
+{% set currentRoute = current_route|default('app_caff_index') %}
+{% set entityLabel = entity_label|default('Caff') %}
+{% set entityRouteMap = {
+    'app_caff_index': 'Caff',
+    'app_cted_index': 'Cted',
+    'app_cas_index': 'Cas',
+    'app_cba_index': 'Cba',
+    'app_cthm_index': 'Cthm',
+    'app_ccje_index': 'Ccje',
+    'app_cea_index': 'Cea',
+    'app_cnpahs_index': 'Cnpahs',
+    'app_cit_index': 'Cit',
+    'app_gs_index': 'Gs',
+    'app_col_index': 'Col'
+} %}
+
+<div class="page-section">
+    <div class="container-fluid px-4">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+            <div>
+                <div class="section-tag">Receiving</div>
+                <h2 class="mb-1">{{ entityLabel }} Records</h2>
+                <p class="text-muted mb-0">Manage received documents for the colleges section.</p>
+            </div>
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+                <a href="{{ path(createRoute) }}" class="btn btn-primary">Create new</a>
+                <select class="form-select form-select-sm" style="min-width:220px;" onchange="window.location.href=this.value">
+                    <option value="{{ path('app_caff_index') }}" {% if currentRoute == 'app_caff_index' %}selected{% endif %}>Caff</option>
+                    <option value="{{ path('app_cted_index') }}" {% if currentRoute == 'app_cted_index' %}selected{% endif %}>Cted</option>
+                    <option value="{{ path('app_cas_index') }}" {% if currentRoute == 'app_cas_index' %}selected{% endif %}>Cas</option>
+                    <option value="{{ path('app_cba_index') }}" {% if currentRoute == 'app_cba_index' %}selected{% endif %}>Cba</option>
+                    <option value="{{ path('app_cthm_index') }}" {% if currentRoute == 'app_cthm_index' %}selected{% endif %}>Cthm</option>
+                    <option value="{{ path('app_ccje_index') }}" {% if currentRoute == 'app_ccje_index' %}selected{% endif %}>Ccje</option>
+                    <option value="{{ path('app_cea_index') }}" {% if currentRoute == 'app_cea_index' %}selected{% endif %}>Cea</option>
+                    <option value="{{ path('app_cnpahs_index') }}" {% if currentRoute == 'app_cnpahs_index' %}selected{% endif %}>Cnpahs</option>
+                    <option value="{{ path('app_cit_index') }}" {% if currentRoute == 'app_cit_index' %}selected{% endif %}>Cit</option>
+                    <option value="{{ path('app_gs_index') }}" {% if currentRoute == 'app_gs_index' %}selected{% endif %}>Gs</option>
+                    <option value="{{ path('app_col_index') }}" {% if currentRoute == 'app_col_index' %}selected{% endif %}>Col</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="dash-card">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="mb-0">{{ entityLabel }} records</h5>
+                <span class="dash-badge">Datatable</span>
+            </div>
+
+            <div class="table-wrap">
+                <table id="{{ tableId }}" class="log-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>No. of Comm.</th>
+                            <th>Document Code</th>
+                            <th>Bearer</th>
+                            <th>Date Received</th>
+                            <th>Time Received</th>
+                            <th>Receiving Staff</th>
+                            <th>Letter Sender</th>
+                            <th>Office Designation</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for record in records %}
+                        <tr>
+                            <td>{{ record.id }}</td>
+                            <td>{{ record.noOfComm }}</td>
+                            <td>{{ record.documentCode }}</td>
+                            <td>{{ record.bearerOfLetter }}</td>
+                            <td>{{ record.dateReceive ? record.dateReceive|date('Y-m-d') : '' }}</td>
+                            <td>{{ record.timeReceive }}</td>
+                            <td>{{ record.receivingStaff }}</td>
+                            <td>{{ record.letterSender }}</td>
+                            <td>{{ record.officeDesignation }}</td>
+                            <td>
+                                <a href="{{ path(currentRoute|replace({'index': 'show'})|replace({'app_': 'app_'}), {'id': record.id}) }}" class="text-primary me-2">View</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="10" class="text-muted">No records found.</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block footer_javascripts %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.min.css">
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const table = document.getElementById('{{ tableId }}');
+            if (table && window.DataTable) {
+                new DataTable(table, {
+                    pageLength: 10,
+                    order: [[0, 'desc']],
+                    dom: '<"d-flex justify-content-between align-items-center mb-3"lfr><"table-wrap"t><"d-flex justify-content-between align-items-center mt-3"ip>',
+                    language: {
+                        search: '_INPUT_',
+                        searchPlaceholder: 'Search records...'
+                    }
+                });
+            }
+        });
+    </script>
+{% endblock %}

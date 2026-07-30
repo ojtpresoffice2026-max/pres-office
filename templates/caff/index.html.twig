@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% set records = caffs %}
+{% set entity_label = 'Caff' %}
+{% set create_route = 'app_caff_new' %}
+{% set current_route = 'app_caff_index' %}
+{% set table_id = 'caff-table' %}
+
+{% block title %}Caff Records{% endblock %}
+{% block page_title %}Receiving{% endblock %}
+{% block page_crumb %}Colleges{% endblock %}
+
+{% block body %}
+    {% include 'receiving/_entity_index.html.twig' %}
+{% endblock %}
