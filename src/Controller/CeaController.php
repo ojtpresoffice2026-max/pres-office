@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Cea;
 use App\Form\CeaType;
-use App\Repository\CeaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,10 +14,14 @@ use Symfony\Component\Routing\Attribute\Route;
 final class CeaController extends AbstractController
 {
     #[Route(name: 'app_cea_index', methods: ['GET'])]
-    public function index(CeaRepository $ceaRepository): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
+        $ceas = $entityManager
+            ->getRepository(Cea::class)
+            ->findAll();
+
         return $this->render('cea/index.html.twig', [
-            'ceas' => $ceaRepository->findAll(),
+            'ceas' => $ceas,
         ]);
     }
 

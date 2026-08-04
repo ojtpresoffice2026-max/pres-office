@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cnpahs index{% endblock %}
+
+{% block body %}
+    <h1>Cnpahs index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>No_of_comm</th>
+                <th>Document_code</th>
+                <th>Bearer_of_letter</th>
+                <th>Date_receive</th>
+                <th>Time_receive</th>
+                <th>Receiving_staff</th>
+                <th>Letter_sender</th>
+                <th>Office_designation</th>
+                <th>Date_of_the_letter</th>
+                <th>Content_of_the_letter</th>
+                <th>Other_note</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cnpah in cnpahs %}
+            <tr>
+                <td>{{ cnpah.id }}</td>
+                <td>{{ cnpah.noOfComm }}</td>
+                <td>{{ cnpah.documentCode }}</td>
+                <td>{{ cnpah.bearerOfLetter }}</td>
+                <td>{{ cnpah.dateReceive ? cnpah.dateReceive|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ cnpah.timeReceive }}</td>
+                <td>{{ cnpah.receivingStaff }}</td>
+                <td>{{ cnpah.letterSender }}</td>
+                <td>{{ cnpah.officeDesignation }}</td>
+                <td>{{ cnpah.dateOfTheLetter ? cnpah.dateOfTheLetter|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ cnpah.contentOfTheLetter }}</td>
+                <td>{{ cnpah.otherNote }}</td>
+                <td>
+                    <a href="{{ path('app_cnpahs_show', {'id': cnpah.id}) }}">show</a>
+                    <a href="{{ path('app_cnpahs_edit', {'id': cnpah.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_cnpahs_new') }}">Create new</a>
+{% endblock %}

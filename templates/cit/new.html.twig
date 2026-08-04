@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Cit{% endblock %}
+
+{% block body %}
+    <h1>Create new Cit</h1>
+
+    {{ include('cit/_form.html.twig') }}
+
+    <a href="{{ path('app_cit_index') }}">back to list</a>
+{% endblock %}

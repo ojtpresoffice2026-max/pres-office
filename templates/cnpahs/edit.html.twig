@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Cnpahs{% endblock %}
+
+{% block body %}
+    <h1>Edit Cnpahs</h1>
+
+    {{ include('cnpahs/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_cnpahs_index') }}">back to list</a>
+
+    {{ include('cnpahs/_delete_form.html.twig') }}
+{% endblock %}

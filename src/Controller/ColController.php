@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Col;
 use App\Form\ColType;
-use App\Repository\ColRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,10 +14,14 @@ use Symfony\Component\Routing\Attribute\Route;
 final class ColController extends AbstractController
 {
     #[Route(name: 'app_col_index', methods: ['GET'])]
-    public function index(ColRepository $colRepository): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
+        $cols = $entityManager
+            ->getRepository(Col::class)
+            ->findAll();
+
         return $this->render('col/index.html.twig', [
-            'cols' => $colRepository->findAll(),
+            'cols' => $cols,
         ]);
     }
 

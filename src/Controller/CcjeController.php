@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Ccje;
 use App\Form\CcjeType;
-use App\Repository\CcjeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,10 +14,14 @@ use Symfony\Component\Routing\Attribute\Route;
 final class CcjeController extends AbstractController
 {
     #[Route(name: 'app_ccje_index', methods: ['GET'])]
-    public function index(CcjeRepository $ccjeRepository): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
+        $ccjes = $entityManager
+            ->getRepository(Ccje::class)
+            ->findAll();
+
         return $this->render('ccje/index.html.twig', [
-            'ccjes' => $ccjeRepository->findAll(),
+            'ccjes' => $ccjes,
         ]);
     }
 

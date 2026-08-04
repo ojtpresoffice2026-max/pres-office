@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Col{% endblock %}
+
+{% block body %}
+    <h1>Col</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ col.id }}</td>
+            </tr>
+            <tr>
+                <th>No_of_comm</th>
+                <td>{{ col.noOfComm }}</td>
+            </tr>
+            <tr>
+                <th>Document_code</th>
+                <td>{{ col.documentCode }}</td>
+            </tr>
+            <tr>
+                <th>Bearer_of_letter</th>
+                <td>{{ col.bearerOfLetter }}</td>
+            </tr>
+            <tr>
+                <th>Date_receive</th>
+                <td>{{ col.dateReceive ? col.dateReceive|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Time_receive</th>
+                <td>{{ col.timeReceive }}</td>
+            </tr>
+            <tr>
+                <th>Receiving_staff</th>
+                <td>{{ col.receivingStaff }}</td>
+            </tr>
+            <tr>
+                <th>Letter_sender</th>
+                <td>{{ col.letterSender }}</td>
+            </tr>
+            <tr>
+                <th>Office_designation</th>
+                <td>{{ col.officeDesignation }}</td>
+            </tr>
+            <tr>
+                <th>Date_of_the_letter</th>
+                <td>{{ col.dateOfTheLetter ? col.dateOfTheLetter|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Content_of_the_letter</th>
+                <td>{{ col.contentOfTheLetter }}</td>
+            </tr>
+            <tr>
+                <th>Other_note</th>
+                <td>{{ col.otherNote }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_col_index') }}">back to list</a>
+
+    <a href="{{ path('app_col_edit', {'id': col.id}) }}">edit</a>
+
+    {{ include('col/_delete_form.html.twig') }}
+{% endblock %}

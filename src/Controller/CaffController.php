@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Caff;
 use App\Form\CaffType;
-use App\Repository\CaffRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,10 +14,14 @@ use Symfony\Component\Routing\Attribute\Route;
 final class CaffController extends AbstractController
 {
     #[Route(name: 'app_caff_index', methods: ['GET'])]
-    public function index(CaffRepository $caffRepository): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
+        $caffs = $entityManager
+            ->getRepository(Caff::class)
+            ->findAll();
+
         return $this->render('caff/index.html.twig', [
-            'caffs' => $caffRepository->findAll(),
+            'caffs' => $caffs,
         ]);
     }
 

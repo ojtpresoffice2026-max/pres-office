@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cas{% endblock %}
+
+{% block body %}
+    <h1>Cas</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ca.id }}</td>
+            </tr>
+            <tr>
+                <th>No_of_comm</th>
+                <td>{{ ca.noOfComm }}</td>
+            </tr>
+            <tr>
+                <th>Document_code</th>
+                <td>{{ ca.documentCode }}</td>
+            </tr>
+            <tr>
+                <th>Bearer_of_letter</th>
+                <td>{{ ca.bearerOfLetter }}</td>
+            </tr>
+            <tr>
+                <th>Date_receive</th>
+                <td>{{ ca.dateReceive ? ca.dateReceive|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Time_receive</th>
+                <td>{{ ca.timeReceive }}</td>
+            </tr>
+            <tr>
+                <th>Receiving_staff</th>
+                <td>{{ ca.receivingStaff }}</td>
+            </tr>
+            <tr>
+                <th>Letter_sender</th>
+                <td>{{ ca.letterSender }}</td>
+            </tr>
+            <tr>
+                <th>Office_designation</th>
+                <td>{{ ca.officeDesignation }}</td>
+            </tr>
+            <tr>
+                <th>Date_of_the_letter</th>
+                <td>{{ ca.dateOfTheLetter ? ca.dateOfTheLetter|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Content_of_the_letter</th>
+                <td>{{ ca.contentOfTheLetter }}</td>
+            </tr>
+            <tr>
+                <th>Other_note</th>
+                <td>{{ ca.otherNote }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_cas_index') }}">back to list</a>
+
+    <a href="{{ path('app_cas_edit', {'id': ca.id}) }}">edit</a>
+
+    {{ include('cas/_delete_form.html.twig') }}
+{% endblock %}

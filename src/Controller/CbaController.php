@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Cba;
 use App\Form\CbaType;
-use App\Repository\CbaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,10 +14,14 @@ use Symfony\Component\Routing\Attribute\Route;
 final class CbaController extends AbstractController
 {
     #[Route(name: 'app_cba_index', methods: ['GET'])]
-    public function index(CbaRepository $cbaRepository): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
+        $cbas = $entityManager
+            ->getRepository(Cba::class)
+            ->findAll();
+
         return $this->render('cba/index.html.twig', [
-            'cbas' => $cbaRepository->findAll(),
+            'cbas' => $cbas,
         ]);
     }
 

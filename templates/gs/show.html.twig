@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gs{% endblock %}
+
+{% block body %}
+    <h1>Gs</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ g.id }}</td>
+            </tr>
+            <tr>
+                <th>No_of_comm</th>
+                <td>{{ g.noOfComm }}</td>
+            </tr>
+            <tr>
+                <th>Document_code</th>
+                <td>{{ g.documentCode }}</td>
+            </tr>
+            <tr>
+                <th>Bearer_of_letter</th>
+                <td>{{ g.bearerOfLetter }}</td>
+            </tr>
+            <tr>
+                <th>Date_receive</th>
+                <td>{{ g.dateReceive ? g.dateReceive|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Time_receive</th>
+                <td>{{ g.timeReceive }}</td>
+            </tr>
+            <tr>
+                <th>Receiving_staff</th>
+                <td>{{ g.receivingStaff }}</td>
+            </tr>
+            <tr>
+                <th>Letter_sender</th>
+                <td>{{ g.letterSender }}</td>
+            </tr>
+            <tr>
+                <th>Office_designation</th>
+                <td>{{ g.officeDesignation }}</td>
+            </tr>
+            <tr>
+                <th>Date_of_the_letter</th>
+                <td>{{ g.dateOfTheLetter ? g.dateOfTheLetter|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Content_of_the_letter</th>
+                <td>{{ g.contentOfTheLetter }}</td>
+            </tr>
+            <tr>
+                <th>Other_note</th>
+                <td>{{ g.otherNote }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_gs_index') }}">back to list</a>
+
+    <a href="{{ path('app_gs_edit', {'id': g.id}) }}">edit</a>
+
+    {{ include('gs/_delete_form.html.twig') }}
+{% endblock %}

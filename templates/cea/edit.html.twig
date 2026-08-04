@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Cea{% endblock %}
+
+{% block body %}
+    <h1>Edit Cea</h1>
+
+    {{ include('cea/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_cea_index') }}">back to list</a>
+
+    {{ include('cea/_delete_form.html.twig') }}
+{% endblock %}

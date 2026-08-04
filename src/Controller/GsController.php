@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Gs;
 use App\Form\GsType;
-use App\Repository\GsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,45 +14,49 @@ use Symfony\Component\Routing\Attribute\Route;
 final class GsController extends AbstractController
 {
     #[Route(name: 'app_gs_index', methods: ['GET'])]
-    public function index(GsRepository $gsRepository): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
+        $gs = $entityManager
+            ->getRepository(Gs::class)
+            ->findAll();
+
         return $this->render('gs/index.html.twig', [
-            'gss' => $gsRepository->findAll(),
+            'gs' => $gs,
         ]);
     }
 
     #[Route('/new', name: 'app_gs_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $gs = new Gs();
-        $form = $this->createForm(GsType::class, $gs);
+        $g = new Gs();
+        $form = $this->createForm(GsType::class, $g);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($gs);
+            $entityManager->persist($g);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_gs_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('gs/new.html.twig', [
-            'gs' => $gs,
+            'g' => $g,
             'form' => $form,
         ]);
     }
 
     #[Route('/{id}', name: 'app_gs_show', methods: ['GET'])]
-    public function show(Gs $gs): Response
+    public function show(Gs $g): Response
     {
         return $this->render('gs/show.html.twig', [
-            'gs' => $gs,
+            'g' => $g,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_gs_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Gs $gs, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Gs $g, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(GsType::class, $gs);
+        $form = $this->createForm(GsType::class, $g);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,16 +66,16 @@ final class GsController extends AbstractController
         }
 
         return $this->render('gs/edit.html.twig', [
-            'gs' => $gs,
+            'g' => $g,
             'form' => $form,
         ]);
     }
 
     #[Route('/{id}', name: 'app_gs_delete', methods: ['POST'])]
-    public function delete(Request $request, Gs $gs, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Gs $g, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$gs->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($gs);
+        if ($this->isCsrfTokenValid('delete'.$g->getId(), $request->getPayload()->getString('_token'))) {
+            $entityManager->remove($g);
             $entityManager->flush();
         }
 

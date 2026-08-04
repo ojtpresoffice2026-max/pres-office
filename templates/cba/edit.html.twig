@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Cba{% endblock %}
+
+{% block body %}
+    <h1>Edit Cba</h1>
+
+    {{ include('cba/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_cba_index') }}">back to list</a>
+
+    {{ include('cba/_delete_form.html.twig') }}
+{% endblock %}

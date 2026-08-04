@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ccje{% endblock %}
+
+{% block body %}
+    <h1>Ccje</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ccje.id }}</td>
+            </tr>
+            <tr>
+                <th>No_of_comm</th>
+                <td>{{ ccje.noOfComm }}</td>
+            </tr>
+            <tr>
+                <th>Document_code</th>
+                <td>{{ ccje.documentCode }}</td>
+            </tr>
+            <tr>
+                <th>Bearer_of_letter</th>
+                <td>{{ ccje.bearerOfLetter }}</td>
+            </tr>
+            <tr>
+                <th>Date_receive</th>
+                <td>{{ ccje.dateReceive ? ccje.dateReceive|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Time_receive</th>
+                <td>{{ ccje.timeReceive }}</td>
+            </tr>
+            <tr>
+                <th>Receiving_staff</th>
+                <td>{{ ccje.receivingStaff }}</td>
+            </tr>
+            <tr>
+                <th>Letter_sender</th>
+                <td>{{ ccje.letterSender }}</td>
+            </tr>
+            <tr>
+                <th>Office_designation</th>
+                <td>{{ ccje.officeDesignation }}</td>
+            </tr>
+            <tr>
+                <th>Date_of_the_letter</th>
+                <td>{{ ccje.dateOfTheLetter ? ccje.dateOfTheLetter|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Content_of_the_letter</th>
+                <td>{{ ccje.contentOfTheLetter }}</td>
+            </tr>
+            <tr>
+                <th>Other_note</th>
+                <td>{{ ccje.otherNote }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_ccje_index') }}">back to list</a>
+
+    <a href="{{ path('app_ccje_edit', {'id': ccje.id}) }}">edit</a>
+
+    {{ include('ccje/_delete_form.html.twig') }}
+{% endblock %}

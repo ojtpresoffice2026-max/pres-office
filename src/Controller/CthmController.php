@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Cthm;
 use App\Form\CthmType;
-use App\Repository\CthmRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,10 +14,14 @@ use Symfony\Component\Routing\Attribute\Route;
 final class CthmController extends AbstractController
 {
     #[Route(name: 'app_cthm_index', methods: ['GET'])]
-    public function index(CthmRepository $cthmRepository): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
+        $cthms = $entityManager
+            ->getRepository(Cthm::class)
+            ->findAll();
+
         return $this->render('cthm/index.html.twig', [
-            'cthms' => $cthmRepository->findAll(),
+            'cthms' => $cthms,
         ]);
     }
 

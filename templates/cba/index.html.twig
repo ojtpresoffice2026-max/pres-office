@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cba index{% endblock %}
+
+{% block body %}
+    <h1>Cba index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>No_of_comm</th>
+                <th>Document_code</th>
+                <th>Bearer_of_letter</th>
+                <th>Date_receive</th>
+                <th>Time_receive</th>
+                <th>Receiving_staff</th>
+                <th>Letter_sender</th>
+                <th>Office_designation</th>
+                <th>Date_of_the_letter</th>
+                <th>Content_of_the_letter</th>
+                <th>Other_note</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cba in cbas %}
+            <tr>
+                <td>{{ cba.id }}</td>
+                <td>{{ cba.noOfComm }}</td>
+                <td>{{ cba.documentCode }}</td>
+                <td>{{ cba.bearerOfLetter }}</td>
+                <td>{{ cba.dateReceive ? cba.dateReceive|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ cba.timeReceive }}</td>
+                <td>{{ cba.receivingStaff }}</td>
+                <td>{{ cba.letterSender }}</td>
+                <td>{{ cba.officeDesignation }}</td>
+                <td>{{ cba.dateOfTheLetter ? cba.dateOfTheLetter|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ cba.contentOfTheLetter }}</td>
+                <td>{{ cba.otherNote }}</td>
+                <td>
+                    <a href="{{ path('app_cba_show', {'id': cba.id}) }}">show</a>
+                    <a href="{{ path('app_cba_edit', {'id': cba.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_cba_new') }}">Create new</a>
+{% endblock %}

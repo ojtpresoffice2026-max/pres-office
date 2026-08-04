@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gs index{% endblock %}
+
+{% block body %}
+    <h1>Gs index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>No_of_comm</th>
+                <th>Document_code</th>
+                <th>Bearer_of_letter</th>
+                <th>Date_receive</th>
+                <th>Time_receive</th>
+                <th>Receiving_staff</th>
+                <th>Letter_sender</th>
+                <th>Office_designation</th>
+                <th>Date_of_the_letter</th>
+                <th>Content_of_the_letter</th>
+                <th>Other_note</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for g in gs %}
+            <tr>
+                <td>{{ g.id }}</td>
+                <td>{{ g.noOfComm }}</td>
+                <td>{{ g.documentCode }}</td>
+                <td>{{ g.bearerOfLetter }}</td>
+                <td>{{ g.dateReceive ? g.dateReceive|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ g.timeReceive }}</td>
+                <td>{{ g.receivingStaff }}</td>
+                <td>{{ g.letterSender }}</td>
+                <td>{{ g.officeDesignation }}</td>
+                <td>{{ g.dateOfTheLetter ? g.dateOfTheLetter|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ g.contentOfTheLetter }}</td>
+                <td>{{ g.otherNote }}</td>
+                <td>
+                    <a href="{{ path('app_gs_show', {'id': g.id}) }}">show</a>
+                    <a href="{{ path('app_gs_edit', {'id': g.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_gs_new') }}">Create new</a>
+{% endblock %}

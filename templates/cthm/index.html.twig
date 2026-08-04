@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cthm index{% endblock %}
+
+{% block body %}
+    <h1>Cthm index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>No_of_comm</th>
+                <th>Document_code</th>
+                <th>Bearer_of_letter</th>
+                <th>Date_receive</th>
+                <th>Time_receive</th>
+                <th>Receiving_staff</th>
+                <th>Letter_sender</th>
+                <th>Office_designation</th>
+                <th>Date_of_the_letter</th>
+                <th>Content_of_the_letter</th>
+                <th>Other_note</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cthm in cthms %}
+            <tr>
+                <td>{{ cthm.id }}</td>
+                <td>{{ cthm.noOfComm }}</td>
+                <td>{{ cthm.documentCode }}</td>
+                <td>{{ cthm.bearerOfLetter }}</td>
+                <td>{{ cthm.dateReceive ? cthm.dateReceive|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ cthm.timeReceive }}</td>
+                <td>{{ cthm.receivingStaff }}</td>
+                <td>{{ cthm.letterSender }}</td>
+                <td>{{ cthm.officeDesignation }}</td>
+                <td>{{ cthm.dateOfTheLetter ? cthm.dateOfTheLetter|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ cthm.contentOfTheLetter }}</td>
+                <td>{{ cthm.otherNote }}</td>
+                <td>
+                    <a href="{{ path('app_cthm_show', {'id': cthm.id}) }}">show</a>
+                    <a href="{{ path('app_cthm_edit', {'id': cthm.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_cthm_new') }}">Create new</a>
+{% endblock %}

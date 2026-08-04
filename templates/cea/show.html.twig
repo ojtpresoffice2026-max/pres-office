@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cea{% endblock %}
+
+{% block body %}
+    <h1>Cea</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cea.id }}</td>
+            </tr>
+            <tr>
+                <th>No_of_comm</th>
+                <td>{{ cea.noOfComm }}</td>
+            </tr>
+            <tr>
+                <th>Document_code</th>
+                <td>{{ cea.documentCode }}</td>
+            </tr>
+            <tr>
+                <th>Bearer_of_letter</th>
+                <td>{{ cea.bearerOfLetter }}</td>
+            </tr>
+            <tr>
+                <th>Date_receive</th>
+                <td>{{ cea.dateReceive ? cea.dateReceive|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Time_receive</th>
+                <td>{{ cea.timeReceive }}</td>
+            </tr>
+            <tr>
+                <th>Receiving_staff</th>
+                <td>{{ cea.receivingStaff }}</td>
+            </tr>
+            <tr>
+                <th>Letter_sender</th>
+                <td>{{ cea.letterSender }}</td>
+            </tr>
+            <tr>
+                <th>Office_designation</th>
+                <td>{{ cea.officeDesignation }}</td>
+            </tr>
+            <tr>
+                <th>Date_of_the_letter</th>
+                <td>{{ cea.dateOfTheLetter ? cea.dateOfTheLetter|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Content_of_the_letter</th>
+                <td>{{ cea.contentOfTheLetter }}</td>
+            </tr>
+            <tr>
+                <th>Other_note</th>
+                <td>{{ cea.otherNote }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_cea_index') }}">back to list</a>
+
+    <a href="{{ path('app_cea_edit', {'id': cea.id}) }}">edit</a>
+
+    {{ include('cea/_delete_form.html.twig') }}
+{% endblock %}

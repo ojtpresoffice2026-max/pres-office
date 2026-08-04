@@ -1,15 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% set records = caffs %}
-{% set entity_label = 'Caff' %}
-{% set create_route = 'app_caff_new' %}
-{% set current_route = 'app_caff_index' %}
-{% set table_id = 'caff-table' %}
-
-{% block title %}Caff Records{% endblock %}
-{% block page_title %}Receiving{% endblock %}
-{% block page_crumb %}Colleges{% endblock %}
+{% block title %}Caff index{% endblock %}
 
 {% block body %}
-    {% include 'receiving/_entity_index.html.twig' %}
+    <h1>Caff index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>No_of_comm</th>
+                <th>Document_code</th>
+                <th>Bearer_of_letter</th>
+                <th>Date_receive</th>
+                <th>Time_receive</th>
+                <th>Receiving_staff</th>
+                <th>Letter_sender</th>
+                <th>Office_designation</th>
+                <th>Date_of_the_letter</th>
+                <th>Content_of_the_letter</th>
+                <th>Other_note</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for caff in caffs %}
+            <tr>
+                <td>{{ caff.id }}</td>
+                <td>{{ caff.noOfComm }}</td>
+                <td>{{ caff.documentCode }}</td>
+                <td>{{ caff.bearerOfLetter }}</td>
+                <td>{{ caff.dateReceive ? caff.dateReceive|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ caff.timeReceive }}</td>
+                <td>{{ caff.receivingStaff }}</td>
+                <td>{{ caff.letterSender }}</td>
+                <td>{{ caff.officeDesignation }}</td>
+                <td>{{ caff.dateOfTheLetter ? caff.dateOfTheLetter|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ caff.contentOfTheLetter }}</td>
+                <td>{{ caff.otherNote }}</td>
+                <td>
+                    <a href="{{ path('app_caff_show', {'id': caff.id}) }}">show</a>
+                    <a href="{{ path('app_caff_edit', {'id': caff.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_caff_new') }}">Create new</a>
 {% endblock %}

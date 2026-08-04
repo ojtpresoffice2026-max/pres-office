@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Ccje{% endblock %}
+
+{% block body %}
+    <h1>Edit Ccje</h1>
+
+    {{ include('ccje/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_ccje_index') }}">back to list</a>
+
+    {{ include('ccje/_delete_form.html.twig') }}
+{% endblock %}

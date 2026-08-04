@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Cnpahs{% endblock %}
+
+{% block body %}
+    <h1>Create new Cnpahs</h1>
+
+    {{ include('cnpahs/_form.html.twig') }}
+
+    <a href="{{ path('app_cnpahs_index') }}">back to list</a>
+{% endblock %}

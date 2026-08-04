@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Cit;
 use App\Form\CitType;
-use App\Repository\CitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,10 +14,14 @@ use Symfony\Component\Routing\Attribute\Route;
 final class CitController extends AbstractController
 {
     #[Route(name: 'app_cit_index', methods: ['GET'])]
-    public function index(CitRepository $citRepository): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
+        $cits = $entityManager
+            ->getRepository(Cit::class)
+            ->findAll();
+
         return $this->render('cit/index.html.twig', [
-            'cits' => $citRepository->findAll(),
+            'cits' => $cits,
         ]);
     }
 

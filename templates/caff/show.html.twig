@@ -12,47 +12,47 @@
                 <td>{{ caff.id }}</td>
             </tr>
             <tr>
-                <th>No of comm</th>
+                <th>No_of_comm</th>
                 <td>{{ caff.noOfComm }}</td>
             </tr>
             <tr>
-                <th>Document code</th>
+                <th>Document_code</th>
                 <td>{{ caff.documentCode }}</td>
             </tr>
             <tr>
-                <th>Bearer of letter</th>
+                <th>Bearer_of_letter</th>
                 <td>{{ caff.bearerOfLetter }}</td>
             </tr>
             <tr>
-                <th>Date receive</th>
-                <td>{{ caff.dateReceive ? caff.dateReceive|date('Y-m-d') : '' }}</td>
+                <th>Date_receive</th>
+                <td>{{ caff.dateReceive ? caff.dateReceive|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Time receive</th>
+                <th>Time_receive</th>
                 <td>{{ caff.timeReceive }}</td>
             </tr>
             <tr>
-                <th>Receiving staff</th>
+                <th>Receiving_staff</th>
                 <td>{{ caff.receivingStaff }}</td>
             </tr>
             <tr>
-                <th>Letter sender</th>
+                <th>Letter_sender</th>
                 <td>{{ caff.letterSender }}</td>
             </tr>
             <tr>
-                <th>Office designation</th>
+                <th>Office_designation</th>
                 <td>{{ caff.officeDesignation }}</td>
             </tr>
             <tr>
-                <th>Date of the letter</th>
-                <td>{{ caff.dateOfTheLetter ? caff.dateOfTheLetter|date('Y-m-d') : '' }}</td>
+                <th>Date_of_the_letter</th>
+                <td>{{ caff.dateOfTheLetter ? caff.dateOfTheLetter|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Content of the letter</th>
+                <th>Content_of_the_letter</th>
                 <td>{{ caff.contentOfTheLetter }}</td>
             </tr>
             <tr>
-                <th>Other note</th>
+                <th>Other_note</th>
                 <td>{{ caff.otherNote }}</td>
             </tr>
         </tbody>

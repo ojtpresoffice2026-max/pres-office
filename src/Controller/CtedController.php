@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Cted;
 use App\Form\CtedType;
-use App\Repository\CtedRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,10 +14,14 @@ use Symfony\Component\Routing\Attribute\Route;
 final class CtedController extends AbstractController
 {
     #[Route(name: 'app_cted_index', methods: ['GET'])]
-    public function index(CtedRepository $ctedRepository): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
+        $cteds = $entityManager
+            ->getRepository(Cted::class)
+            ->findAll();
+
         return $this->render('cted/index.html.twig', [
-            'cteds' => $ctedRepository->findAll(),
+            'cteds' => $cteds,
         ]);
     }
 
