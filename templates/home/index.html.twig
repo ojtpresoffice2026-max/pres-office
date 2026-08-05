@@ -1,0 +1,329 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PresOffice Preview{% endblock %}
+
+{% block page_title %}Home{% endblock %}
+
+{% block page_crumb %}Overview{% endblock %}
+
+{% block body %}
+
+<style>
+    body, .main, .app-page { background-color: var(--bg); }
+</style>
+
+<div class="app-page active" id="page-home">
+
+    <section class="hero">
+        <div class="container-fluid px-5">
+
+            <div class="eyebrow"><span class="dot"></span> System Online</div>
+
+            <h1>
+                Manage University Documents<br>
+                <span class="accent">Securely & Efficiently</span>
+            </h1>
+
+            <p>
+                PresOffice is the official document management platform of the NORSU
+                President's Office — helping the university store, organize, search,
+                and track files with speed and accountability.
+            </p>
+
+            <div class="hero-stats">
+                <div class="stat"><h3>100%</h3><span>Digital Records</span></div>
+                <div class="stat"><h3>24/7</h3><span>Document Tracking</span></div>
+                <div class="stat"><h3>Secure</h3><span>Role-Based Access</span></div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="page-section" id="dashboard">
+        <div class="container-fluid px-5">
+
+            <div class="mb-4">
+                <span class="section-tag">Overview</span>
+                <h2>Dashboard <span class="dash-badge"><i class="bi bi-hourglass-split"></i> Sample Data</span></h2>
+                <p class="text-muted mt-2 mb-0">A snapshot of document activity across the Office. Figures below are placeholder data for layout purposes only.</p>
+            </div>
+
+            <div class="row g-4 mb-4">
+                <div class="col-12">
+                    <div class="dash-card">
+                        <h5>Quick Actions</h5>
+                        <div class="dash-sub">Jump straight to common tasks</div>
+                        <div class="quick-actions">
+                            <a data-page="receiving" data-title="Receiving" data-crumb="New Receiving"><i class="bi bi-file-earmark-plus-fill"></i> New Receiving</a>
+                            <a data-page="receiving" data-title="Receiving" data-crumb="Received Records"><i class="bi bi-search"></i> Search Received Records</a>
+                            <a data-page="receiving" data-title="Receiving" data-crumb="Search Document"><i class="bi bi-geo-alt-fill"></i> View Receiving Queue</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+
+                <div class="col-lg-5">
+                    <div class="dash-card">
+                        <h5>Documents by Status</h5>
+                        <div class="dash-sub">Distribution of all logged documents this month</div>
+                        <div class="chart-wrap">
+                            <canvas id="statusPieChart"></canvas>
+                        </div>
+                        <div class="chart-legend">
+                            <div class="item"><span class="dot" style="background:#2563EB"></span> Received</div>
+                            <div class="item"><span class="dot" style="background:#D4A017"></span> Pending</div>
+                            <div class="item"><span class="dot" style="background:#22C55E"></span> Approved</div>
+                            <div class="item"><span class="dot" style="background:#8B5CF6"></span> Forwarded</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-7">
+                    <div class="dash-card">
+
+                        <h5>This Week at a Glance</h5>
+                        <div class="dash-sub">Quick totals across all document types</div>
+
+                        <div class="stat-mini-row mb-4">
+                            <div class="stat-mini">
+                                <div class="num"><i class="bi bi-inbox-fill text-primary"></i> 128</div>
+                                <div class="lbl">Received</div>
+                            </div>
+                            <div class="stat-mini">
+                                <div class="num"><i class="bi bi-hourglass-split text-warning"></i> 34</div>
+                                <div class="lbl">Pending</div>
+                            </div>
+                            <div class="stat-mini">
+                                <div class="num"><i class="bi bi-check-circle-fill text-success"></i> 81</div>
+                                <div class="lbl">Approved</div>
+                            </div>
+                            <div class="stat-mini">
+                                <div class="num"><i class="bi bi-send-fill" style="color:#8B5CF6"></i> 13</div>
+                                <div class="lbl">Forwarded</div>
+                            </div>
+                        </div>
+
+                        <h5 class="mt-4">Recently Indexed Documents</h5>
+                        <div class="dash-sub">Latest entries in the tracking log</div>
+
+                        <div class="table-wrap">
+                            <table class="log-table">
+                                <thead>
+                                    <tr><th>Tracking No.</th><th>Document</th><th>Department</th><th>Status</th><th>Date</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>2026-07-0142</td><td>Memorandum — Faculty Meeting</td><td>Academic Affairs</td>
+                                        <td><span class="status-pill approved"><i class="bi bi-check-circle-fill"></i> Approved</span></td>
+                                        <td>Jul 26, 2026</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2026-07-0141</td><td>Travel Order — Conference</td><td>Finance Office</td>
+                                        <td><span class="status-pill pending"><i class="bi bi-hourglass-split"></i> Pending</span></td>
+                                        <td>Jul 25, 2026</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2026-07-0140</td><td>MOA — Partner University</td><td>External Affairs</td>
+                                        <td><span class="status-pill forwarded"><i class="bi bi-send-fill"></i> Forwarded</span></td>
+                                        <td>Jul 24, 2026</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2026-07-0139</td><td>Requisition — Office Supplies</td><td>Admin Services</td>
+                                        <td><span class="status-pill received"><i class="bi bi-inbox-fill"></i> Received</span></td>
+                                        <td>Jul 24, 2026</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2026-07-0138</td><td>Resolution — Board Approval</td><td>President's Office</td>
+                                        <td><span class="status-pill approved"><i class="bi bi-check-circle-fill"></i> Approved</span></td>
+                                        <td>Jul 23, 2026</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="placeholder-note">
+                            <i class="bi bi-info-circle-fill"></i>
+                            <span>This dashboard currently shows sample data. It will be connected to live records once the data source and fields are finalized.</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<div class="app-page" id="page-receiving">
+    <section class="page-section">
+        <div class="container-fluid px-5">
+            <span class="section-tag">Receiving</span>
+            <h2 class="mb-4">Receiving</h2>
+            <div class="sub-page-grid">
+                <div class="sub-page-card"><i class="bi bi-box-arrow-in-down"></i><h5>New Receiving</h5><span>Log a newly received document</span></div>
+                <div class="sub-page-card"><i class="bi bi-files"></i><h5>Received Records</h5><span>Browse documents already received</span></div>
+                <div class="sub-page-card"><i class="bi bi-search"></i><h5>Search Document</h5><span>Find a received record quickly</span></div>
+            </div>
+            <div class="placeholder-card mt-4">
+                <i class="bi bi-cone-striped"></i>
+                <h4>Page under construction</h4>
+                <p>This section will handle receiving workflow once finalized.</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="app-page" id="page-activity-logs">
+    <section class="page-section">
+        <div class="container-fluid px-5">
+
+            <div class="mb-4">
+                <span class="section-tag">Audit Trail</span>
+                <h2>Activity Logs <span class="dash-badge"><i class="bi bi-hourglass-split"></i> Sample Data</span></h2>
+                <p class="text-muted mt-2 mb-0">
+                    A complete record of user and system actions — logins, edits, approvals, and transfers —
+                    for accountability and traceability.
+                </p>
+            </div>
+
+            <div class="row g-4">
+
+                <div class="col-lg-4">
+                    <div class="dash-card">
+                        <h5>Log Summary</h5>
+                        <div class="dash-sub">Actions recorded today</div>
+                        <div class="stat-mini-row" style="flex-direction:column;">
+                            <div class="stat-mini">
+                                <div class="num"><i class="bi bi-box-arrow-in-right text-primary"></i> 22</div>
+                                <div class="lbl">Logins</div>
+                            </div>
+                            <div class="stat-mini">
+                                <div class="num"><i class="bi bi-pencil-fill text-warning"></i> 47</div>
+                                <div class="lbl">Records Edited</div>
+                            </div>
+                            <div class="stat-mini">
+                                <div class="num"><i class="bi bi-check-circle-fill text-success"></i> 19</div>
+                                <div class="lbl">Approvals</div>
+                            </div>
+                            <div class="stat-mini">
+                                <div class="num"><i class="bi bi-arrow-left-right" style="color:#8B5CF6"></i> 8</div>
+                                <div class="lbl">Transfers</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="dash-card">
+
+                        <h5>Full Audit Log</h5>
+                        <div class="table-wrap">
+                            <table class="log-table">
+                                <thead>
+                                    <tr><th>User</th><th>Action</th><th>Record</th><th>Status</th><th>Date</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>admin</td><td>Approved document</td><td>2026-07-0142</td><td><span class="status-pill approved"><i class="bi bi-check-circle-fill"></i> Approved</span></td><td>Jul 26, 2026</td>
+                                    </tr>
+                                    <tr>
+                                        <td>clerk</td><td>Created record</td><td>2026-07-0141</td><td><span class="status-pill pending"><i class="bi bi-hourglass-split"></i> Pending</span></td><td>Jul 25, 2026</td>
+                                    </tr>
+                                    <tr>
+                                        <td>supervisor</td><td>Forwarded request</td><td>2026-07-0140</td><td><span class="status-pill forwarded"><i class="bi bi-send-fill"></i> Forwarded</span></td><td>Jul 24, 2026</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="app-page" id="page-about">
+    <section class="page-section">
+        <div class="container-fluid px-5">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-6">
+                    <span class="section-tag">About</span>
+                    <h2>Who we are</h2>
+                    <p id="page-about">PresOffice is designed to help administrators manage documents, improve transparency, and keep every official record easy to locate.</p>
+                    <ul class="about-checklist">
+                        <li><i class="bi bi-check-circle-fill"></i> Secure digital filing and retrieval</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Activity logging and audit trails</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Workflow support for receiving and approvals</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-visual">
+                        <div class="about-seal"><i class="bi bi-mortarboard-fill"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="app-page" id="page-contact">
+    <section class="page-section">
+        <div class="container-fluid px-5">
+            <div class="row g-4">
+                <div class="col-md-8">
+                    <span class="section-tag">Contact</span>
+                    <h2>Get in touch</h2>
+                    <p class="text-muted">Reach out if you need support, have questions, or want to request a document workflow enhancement.</p>
+                </div>
+                <div class="col-md-4">
+                    <div class="contact-card">
+                        <h3>Support</h3>
+                        <p><i class="bi bi-envelope-fill"></i> support@presoffice.norsu.edu.ph</p>
+                        <p><i class="bi bi-telephone-fill"></i> (+63) 35 522-5050</p>
+                        <p><i class="bi bi-geo-alt-fill"></i> Kagawasan Avenue, Dumaguete City</p>
+                        <div class="footer-social mt-3">
+                            <a href="#"><i class="bi bi-twitter"></i></a>
+                            <a href="#"><i class="bi bi-linkedin"></i></a>
+                            <a href="#"><i class="bi bi-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}
+
+{% block footer_javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <script>
+        (function() {
+            var pieCanvas = document.getElementById('statusPieChart');
+            if (pieCanvas && window.Chart) {
+                new Chart(pieCanvas, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Received', 'Pending', 'Approved', 'Forwarded'],
+                        datasets: [{
+                            data: [128, 34, 81, 13],
+                            backgroundColor: ['#2563EB', '#D4A017', '#22C55E', '#8B5CF6'],
+                            borderWidth: 0,
+                            hoverOffset: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '65%',
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            }
+        })();
+    </script>
+{% endblock %}
